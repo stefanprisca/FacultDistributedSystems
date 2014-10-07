@@ -1,12 +1,35 @@
-*.class
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+## no archives
 *.jar
-*.war
-*.ear
+*.zip
+*.gz
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+## no derived resources
+*.class
+bin/
+target/
+plugin.xml_gen
+.recommenders/
+aggregators/
+screenshots/
+
+## xtend-gen should not be checked in
+xtend-gen/
+
+## jrebel project config files
+rebel.xml
+
+## no settings (except xtend)
+.project
+.metadata
+.classpath
+.settings/
+!.settings/org.eclipse.xtend.core.Xtend.prefs
+.checkstyle
+
+## various other file types we don't want to have in the repository:
+.DS_Store
+*~
+*#
+*.licensed
+*.aux
+*_trace
