@@ -13,17 +13,28 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import ro.stefanprisca.distsystems.app1.beans.ApplicationUserManager;
+import ro.stefanprisca.distsystems.app1.beans.NavigationBean;
 import ro.stefanprisca.distsystems.app1.models.ApplicationUser;
 
 @RunWith(JUnit4.class)
-public class DBConnectionTest {
-
-	private static final String PERSISTENCE_UNIT_NAME = "applicationUsers";
+public class LogInTest {
 	private static EntityManagerFactory factory;
 
+	private ApplicationUserManager usermanager;
+	private NavigationBean navbean;
+
 	@Before
-	public void setUp() throws Exception {
-		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+	public void setup() {
+		usermanager = new ApplicationUserManager();
+		navbean = new NavigationBean();
+		usermanager.setNavigationBean(navbean);
+
+		factory = Persistence
+				.createEntityManagerFactory(ApplicationUserManager.PERSISTENCE_UNIT_NAME);
+		initDB();
+	}
+
+	private void initDB() {
 		EntityManager em = factory.createEntityManager();
 
 		// Begin a new local transaction so that we can persist a new entity
@@ -34,11 +45,11 @@ public class DBConnectionTest {
 		// Persons should be empty
 
 		// do we have entries?
-		boolean createNewEntries = (q.getResultList().size() == 0);
+		boolean createNewEntries = (q.getResultList().size() < 2);
 
 		// No, so lets create new entries
 		if (createNewEntries) {
-			assertTrue(q.getResultList().size() == 0);
+
 			ApplicationUser user = new ApplicationUser();
 			user.setBirthDate("12");
 			user.setHomeAddress("asda");
@@ -51,6 +62,17 @@ public class DBConnectionTest {
 
 			em.persist(user);
 
+			ApplicationUser admin = new ApplicationUser();
+			user.setBirthDate("12");
+			user.setHomeAddress("asda");
+			user.setName("Stefan");
+			user.setLatitude("0");
+			user.setLongitude("0");
+			user.setType(ApplicationUserManager.ADMINISTRATOR_TYPE);
+			user.setLoginName("admin");
+			user.setPassword("admin");
+
+			em.persist(admin);
 		}
 
 		// Commit the transaction, which will cause the entity to
@@ -63,36 +85,24 @@ public class DBConnectionTest {
 
 	}
 
-	@Test
-	public void checkAvailableUsers() {
-
-		// now lets check the database and see if the created entries are there
-		// create a fresh, new EntityManager
-		EntityManager em = factory.createEntityManager();
-
-		// Perform a simple query for all the Message entities
-		Query q = em.createQuery("select u from ApplicationUser u");
-
-		assertTrue(q.getResultList().size() > 0);
-
-		em.close();
+	@Test(expected = NullPointerException.class)
+	public void testLogIn() {
+		usermanager.setLoginReqID("thisisnotauser");
+		usermanager.setLoginReqPW("nouserpw");
+		usermanager.doLogin();
 	}
 
-	// @Test(expected = javax.persistence.NoResultException.class)
-	// public void deletePerson() {
-	// EntityManager em = factory.createEntityManager();
-	// // Begin a new local transaction so that we can persist a new entity
-	// em.getTransaction().begin();
-	// Query q = em
-	// .createQuery("SELECT p FROM Person p WHERE p.firstName = :firstName AND p.lastName = :lastName");
-	// q.setParameter("firstName", "Jim_1");
-	// q.setParameter("lastName", "Knopf_!");
-	// Person user = (Person) q.getSingleResult();
-	// em.remove(user);
-	// em.getTransaction().commit();
-	// Person person = (Person) q.getSingleResult();
-	// // Begin a new local transaction so that we can persist a new entity
-	//
-	// em.close();
-	// }
+	@Test
+	public void testValidLogIn() {
+		usermanager.setLoginReqID("user");
+		usermanager.setLoginReqPW("user");
+		assertTrue(usermanager.doLogin().equals(navbean.toRegularPage()));
+	}
+
+	@Test
+	public void testValidAdminLogIn() {
+		usermanager.setLoginReqID("admin");
+		usermanager.setLoginReqPW("admin");
+		assertTrue(usermanager.doLogin().equals(navbean.toAdminPage()));
+	}
 }

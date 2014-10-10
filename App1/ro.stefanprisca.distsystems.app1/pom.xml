@@ -75,6 +75,12 @@
 					<include>**/*.xml</include>
 				</includes>
 			</resource>
+			<resource>
+				<directory>src/main/webapp/resources/css</directory>
+				<includes>
+					<include>*.css</include>
+				</includes>
+			</resource>
 		</resources>
 	</build>
 </project>
