@@ -15,6 +15,20 @@
 			styleClass="userTable" headerClass="userTableHeader"
 			rowClasses="userTableOddRow,userTableEvenRow">
 			<h:column>
+				<f:facet name="header">Login ID</f:facet>
+				<h:inputText value="#{user.loginID}" size="20"
+					rendered="#{user.canEdit}" />
+				<h:outputText value="#{user.loginID}"
+					rendered="#{not user.canEdit}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Login PW</f:facet>
+				<h:inputText value="#{user.loginPW}" size="20"
+					rendered="#{user.canEdit}" />
+				<h:outputText value="#{user.loginPW}"
+					rendered="#{not user.canEdit}" />
+			</h:column>
+			<h:column>
 				<f:facet name="header">Name</f:facet>
 				<h:inputText value="#{user.name}" size="20"
 					rendered="#{user.canEdit}" />
@@ -46,13 +60,6 @@
 				<h:inputText value="#{user.longitude}" size="20"
 					rendered="#{user.canEdit}" />
 				<h:outputText value="#{user.longitude}"
-					rendered="#{not user.canEdit}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Editable</f:facet>
-				<h:inputText value="#{user.canEdit}" size="20"
-					rendered="#{user.canEdit}" />
-				<h:outputText value="#{user.canEdit}"
 					rendered="#{not user.canEdit}" />
 			</h:column>
 			<h:column>
@@ -88,7 +95,7 @@
 			</tr>
 			<tr>
 				<td>Home Address :</td>
-				<td><h:inputText size="5"
+				<td><h:inputText size="20"
 						value="#{adminManager.newUser.homeAddress}" /></td>
 			</tr>
 			<tr>
@@ -102,11 +109,23 @@
 						value="#{adminManager.newUser.latitude}" /></td>
 			</tr>
 			<tr>
+				<td>Login ID :</td>
+				<td><h:inputText size="10"
+						value="#{adminManager.newUser.loginID}" /></td>
+			</tr>
+			<tr>
+				<td>Login PW :</td>
+				<td><h:inputText size="10"
+						value="#{adminManager.newUser.loginPW}" /></td>
+			</tr>
+			<tr>
 				<td></td>
 				<td><h:commandButton value="Add User"
 						action="#{adminManager.addUser}" /></td>
 			</tr>
 		</table>
 	</h:form>
+	<h:commandButton value="Log out"
+						action="#{adminManager.logout}" />
 </h:body>
 </html>

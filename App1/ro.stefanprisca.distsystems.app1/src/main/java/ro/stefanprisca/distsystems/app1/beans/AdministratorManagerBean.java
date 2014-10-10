@@ -44,6 +44,7 @@ public class AdministratorManagerBean extends ApplicationUserManager {
 			if (old != null) {
 				old.setBirthDate(user.getBirthDate());
 				old.setCanEdit(false);
+				old.setName(user.getName());
 				old.setHomeAddress(user.getHomeAddress());
 				old.setLatitude(user.getLatitude());
 				old.setLoginName(user.getLoginName());
@@ -101,6 +102,14 @@ public class AdministratorManagerBean extends ApplicationUserManager {
 
 	public void setNewUser(ApplicationUser newUser) {
 		this.newUser = newUser;
+	}
+
+	@Override
+	public String doLogout() {
+		this.users.clear();
+		this.users = null;
+
+		return super.doLogout();
 	}
 
 }
