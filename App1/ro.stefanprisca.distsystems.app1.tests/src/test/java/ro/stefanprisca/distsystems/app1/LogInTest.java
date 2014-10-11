@@ -105,4 +105,13 @@ public class LogInTest {
 		usermanager.setLoginReqPW("admin");
 		assertTrue(usermanager.doLogin().equals(navbean.toAdminPage()));
 	}
+
+	@Test
+	public void testUserLogout() {
+		usermanager.setLoginReqID("admin");
+		usermanager.setLoginReqPW("admin");
+		usermanager.doLogin();
+		String response = usermanager.doLogout();
+		assertTrue(response.equals(navbean.toLogIn()));
+	}
 }

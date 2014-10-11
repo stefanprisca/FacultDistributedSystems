@@ -110,4 +110,20 @@ public class ApplicationUser {
 		return id;
 	}
 
+	public String getLoginID() {
+		return loginID;
+	}
+
+	public void setLoginID(String loginID) {
+		this.loginID = loginID;
+	}
+
+	public String getLoginPW() {
+		return loginPW;
+	}
+
+	public void setLoginPW(String loginPW) {
+		this.loginPW = loginPW;
+	}
+
 }

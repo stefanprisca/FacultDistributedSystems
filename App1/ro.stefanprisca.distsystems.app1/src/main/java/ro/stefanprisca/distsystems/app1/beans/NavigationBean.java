@@ -8,14 +8,14 @@ import javax.faces.bean.SessionScoped;
 public class NavigationBean {
 
 	public String toLogIn() {
-		return "/home.xhtml";
+		return "/home.xhtml?faces-redirect=true";
 	}
 
 	public String toAdminPage() {
-		return "/secured/admin.xhtml";
+		return "/secured/admin.xhtml?faces-redirect=true";
 	}
 
 	public String toRegularPage() {
-		return "/user.xhtml";
+		return "/user.xhtml?faces-redirect=true";
 	}
 }

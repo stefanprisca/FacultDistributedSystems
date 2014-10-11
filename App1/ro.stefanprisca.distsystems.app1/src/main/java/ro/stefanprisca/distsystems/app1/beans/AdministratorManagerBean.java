@@ -14,7 +14,7 @@ import ro.stefanprisca.distsystems.app1.models.ApplicationUser;
 public class AdministratorManagerBean extends ApplicationUserManager {
 
 	private final EntityManagerFactory factory = Persistence
-			.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+			.createEntityManagerFactory(ApplicationUserManager.PERSISTENCE_UNIT_NAME);
 
 	private ApplicationUser editableUser = new ApplicationUser();
 	private ApplicationUser newUser = new ApplicationUser();

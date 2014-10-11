@@ -9,7 +9,10 @@
 	<h:outputStylesheet library="css" name="styles.css" />
 </h:head>
 <h:body>
+	<h1>Hello #{userManager.user.name} !</h1>
+	 
 	<h:form>
+	<h:commandButton id="button" value="LogOut" action="#{adminManager.doLogout}"/><br/>
 		<h:outputStylesheet library="css" name="style.css" />
 		<h:dataTable value="#{adminManager.users}" var="user"
 			styleClass="userTable" headerClass="userTableHeader"
@@ -125,7 +128,6 @@
 			</tr>
 		</table>
 	</h:form>
-	<h:commandButton value="Log out"
-						action="#{adminManager.logout}" />
+	
 </h:body>
 </html>

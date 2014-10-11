@@ -6,6 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -77,6 +78,13 @@ public class ApplicationUserManager {
 	}
 
 	public String doLogout() {
+
+		System.out.println("Loggin out...");
+
+		ExternalContext ex = FacesContext.getCurrentInstance()
+				.getExternalContext();
+		ex.invalidateSession();
+
 		this.user = null;
 
 		return navigationBean.toLogIn();

@@ -2,19 +2,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "htth://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"     
-      xmlns:h="http://java.sun.com/jsf/html">
-  
-    <h:head>
-        <title>Regular User page</title>
-    </h:head>
-    <h:body>
-        <h3>Hello #{userManager.user.name} !</h3>
-        <p>Here is your information</p>
-        <h:outputText value="Name: #{userManager.user.name}"/><br/>
-        <h:outputText value="Home Address: #{userManager.user.homeAddress}"></h:outputText><br/>
-        <h:outputText value="Birth Date: #{userManager.user.birthDate}"></h:outputText><br/>
-        <h:outputText value="Global Position: ( #{userManager.user.latitude};#{userManager.user.longitude})"></h:outputText><br/>
-        <h:commandButton id="logoutButton" value="Log Out" action="#{userManager.doLogout}"></h:commandButton>
-    </h:body>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Regular User page</title>
+</h:head>
+<h:body>
+	<h3>Hello #{userManager.user.name} !</h3>
+	<h:form>
+		<h:commandButton id="button" value="LogOut"
+			action="#{userManager.doLogout}" />
+		<br />
+		<p>Here is your information:</p>
+		<h:outputText value="Name: #{userManager.user.name}" />
+		<br />
+		<h:outputText value="Home Address: #{userManager.user.homeAddress}"></h:outputText>
+		<br />
+		<h:outputText value="Birth Date: #{userManager.user.birthDate}"></h:outputText>
+		<br />
+		<h:outputText
+			value="Global Position: ( #{userManager.user.latitude};#{userManager.user.longitude})"></h:outputText>
+		<br />
+		<h:outputText
+			value="#{restfulClient.getTimeZone(userManager.user.latitude, userManager.user.longitude)}"></h:outputText>
+	</h:form>
+	<br />
+
+</h:body>
+
 </html>
