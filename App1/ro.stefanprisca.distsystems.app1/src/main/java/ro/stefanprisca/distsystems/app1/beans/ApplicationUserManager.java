@@ -81,9 +81,13 @@ public class ApplicationUserManager {
 
 		System.out.println("Loggin out...");
 
-		ExternalContext ex = FacesContext.getCurrentInstance()
-				.getExternalContext();
-		ex.invalidateSession();
+		FacesContext fc = FacesContext.getCurrentInstance();
+		if (fc != null) {
+
+			ExternalContext ex = fc.getExternalContext();
+			ex.invalidateSession();
+
+		}
 
 		this.user = null;
 
