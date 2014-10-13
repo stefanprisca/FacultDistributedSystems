@@ -5,6 +5,7 @@ ro.*/*.jar
 *.uml
 *.~ml
 *.jpg
+*.odt
 
 ## no derived resources
 *.class
