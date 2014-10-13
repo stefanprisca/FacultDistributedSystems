@@ -1,7 +1,10 @@
 ## no archives
-*.jar
+ro.*/*.jar
 *.zip
 *.gz
+*.uml
+*.~ml
+*.jpg
 
 ## no derived resources
 *.class
