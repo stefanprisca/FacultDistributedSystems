@@ -20,6 +20,8 @@ public class AdministratorManagerBean extends ApplicationUserManager {
 	private ApplicationUser newUser = new ApplicationUser();
 	protected List<ApplicationUser> users;
 
+	private boolean userType;
+
 	public ApplicationUser getEditableUser() {
 		return editableUser;
 	}
@@ -61,6 +63,13 @@ public class AdministratorManagerBean extends ApplicationUserManager {
 	}
 
 	public String addUser() {
+
+		if (userType) {
+			newUser.setType(ADMINISTRATOR_TYPE);
+		} else {
+			newUser.setType(REGULAR_TYPE);
+		}
+
 		users.add(newUser);
 
 		EntityManager em = factory.createEntityManager();
@@ -110,6 +119,14 @@ public class AdministratorManagerBean extends ApplicationUserManager {
 		this.users = null;
 
 		return super.doLogout();
+	}
+
+	public Boolean getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Boolean userType) {
+		this.userType = userType;
 	}
 
 }

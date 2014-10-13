@@ -59,8 +59,10 @@ public class ApplicationUserManager {
 			// Set login ERROR
 			FacesMessage msg = new FacesMessage("Login error!", "ERROR MSG");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-
+			FacesContext fc = FacesContext.getCurrentInstance();
+			if (fc != null) {
+				fc.addMessage(null, msg);
+			}
 			// To to login page
 			return navigationBean.toLogIn();
 		}

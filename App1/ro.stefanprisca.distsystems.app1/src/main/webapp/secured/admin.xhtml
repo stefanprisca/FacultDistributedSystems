@@ -10,9 +10,11 @@
 </h:head>
 <h:body>
 	<h1>Hello #{userManager.user.name} !</h1>
-	 
+
 	<h:form>
-	<h:commandButton id="button" value="LogOut" action="#{adminManager.doLogout}"/><br/>
+		<h:commandButton id="button" value="LogOut"
+			action="#{adminManager.doLogout}" />
+		<br />
 		<h:outputStylesheet library="css" name="style.css" />
 		<h:dataTable value="#{adminManager.users}" var="user"
 			styleClass="userTable" headerClass="userTableHeader"
@@ -21,15 +23,13 @@
 				<f:facet name="header">Login ID</f:facet>
 				<h:inputText value="#{user.loginID}" size="20"
 					rendered="#{user.canEdit}" />
-				<h:outputText value="#{user.loginID}"
-					rendered="#{not user.canEdit}" />
+				<h:outputText value="#{user.loginID}" rendered="#{not user.canEdit}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Login PW</f:facet>
 				<h:inputText value="#{user.loginPW}" size="20"
 					rendered="#{user.canEdit}" />
-				<h:outputText value="#{user.loginPW}"
-					rendered="#{not user.canEdit}" />
+				<h:outputText value="#{user.loginPW}" rendered="#{not user.canEdit}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Name</f:facet>
@@ -66,30 +66,29 @@
 					rendered="#{not user.canEdit}" />
 			</h:column>
 			<h:column>
-            <f:facet name="header">Edit</f:facet>
-               <h:commandButton value="Edit" 
-                  action="#{adminManager.editUser(user)}" 
-                  rendered="#{not user.canEdit}">        
-               </h:commandButton>
-         </h:column>
-         <h:column>
-            <f:facet name="header">Delete</f:facet>
-               <h:commandButton value="Delete" 
-                  action="#{adminManager.deleteUser(user)}" 
-                  rendered="#{not user.canEdit}">        
-               </h:commandButton>
-         </h:column>
+				<f:facet name="header">Edit</f:facet>
+				<h:commandButton value="Edit"
+					action="#{adminManager.editUser(user)}"
+					rendered="#{not user.canEdit}">
+				</h:commandButton>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+				<h:commandButton value="Delete"
+					action="#{adminManager.deleteUser(user)}"
+					rendered="#{not user.canEdit}">
+				</h:commandButton>
+			</h:column>
 		</h:dataTable>
 		<h:commandButton value="Save Employees"
-          action="#{adminManager.saveUsers}" />	  
+			action="#{adminManager.saveUsers}" />
 
 		<h3>Add User</h3>
 		<hr />
 		<table>
 			<tr>
 				<td>Name :</td>
-				<td><h:inputText size="10"
-						value="#{adminManager.newUser.name}" /></td>
+				<td><h:inputText size="10" value="#{adminManager.newUser.name}" /></td>
 			</tr>
 			<tr>
 				<td>Birthday :</td>
@@ -122,12 +121,16 @@
 						value="#{adminManager.newUser.loginPW}" /></td>
 			</tr>
 			<tr>
+				<td>Add Administrator</td>
+				<td><h:selectBooleanCheckbox value="#{adminManager.userType}" /></td>
+			</tr>
+			<tr>
 				<td></td>
 				<td><h:commandButton value="Add User"
 						action="#{adminManager.addUser}" /></td>
 			</tr>
 		</table>
 	</h:form>
-	
+
 </h:body>
 </html>

@@ -85,11 +85,11 @@ public class LogInTest {
 
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void testLogIn() {
 		usermanager.setLoginReqID("thisisnotauser");
 		usermanager.setLoginReqPW("nouserpw");
-		usermanager.doLogin();
+		assertTrue(usermanager.doLogin().equals(navbean.toLogIn()));
 	}
 
 	@Test
