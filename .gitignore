@@ -37,3 +37,10 @@ rebel.xml
 *.licensed
 *.aux
 *_trace
+*.mdf
+*.ldf
+/App2/app2/app2/obj/Debug
+/App2/app2/packages
+*.suo
+*.sln
+*.csproj
