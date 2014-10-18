@@ -1,6 +1,8 @@
-﻿using app2.Models;
+﻿using app2.Content;
+using app2.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,8 +17,9 @@ namespace app2.Secured
         protected void Page_Load(object sender, EventArgs e)
         {
             db = new ds_assign1Entities();
-            clientCookie = Request.Cookies.Get(_Default.COOKIE_NAME);
-            if (clientCookie == null || !clientCookie.Value.Equals(_Default.ADMINISTRATOR_TYPE))
+
+            clientCookie = Request.Cookies.Get(Constants.COOKIE_NAME);
+            if (clientCookie == null || !clientCookie.Value.Equals(Constants.ADMINISTRATOR_TYPE))
             {
                 Response.Redirect("../Default");
             }
@@ -24,9 +27,7 @@ namespace app2.Secured
 
         public IQueryable<APPLICATIONUSER> GetUsers()
         {
-            var users = db.APPLICATIONUSERs;
-            Console.Out.Write(users.ToString());
-            return users;
+            return db.APPLICATIONUSERs;
         }
 
         public void LogOut(object sender, EventArgs e)
@@ -35,6 +36,8 @@ namespace app2.Secured
             clientCookie.Value = null;
             Response.Cookies.Add(clientCookie);
             Response.Redirect("../Default");
+            db.Dispose();
         }
+
     }
 }

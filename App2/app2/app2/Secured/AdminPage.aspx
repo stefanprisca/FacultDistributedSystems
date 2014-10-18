@@ -3,10 +3,12 @@
 <asp:Content runat="server"  ID="BodyContent" ContentPlaceHolderID="MainContent">
     <div class="row">
      <asp:ListView ID="userList"
+                
                 ItemType="app2.Models.APPLICATIONUSER"
                 runat="server"
                 GroupItemCount="4"
-                SelectMethod="GetUsers">
+                SelectMethod="GetUsers"
+                >
                 <EmptyDataTemplate>
                     <table >
                         <tr>
@@ -30,7 +32,7 @@
                                 <td> <span style="font-size:30px;"> <%#Item.NAME %></span></td>
                                 </tr>
                             <tr>
-                                <td> <a href="Edit.aspx"> View and Edit user </a></td>
+                                <td> <a href="UserEdit.aspx?<%#app2.Content.Constants.QUERRY_UID%>=<%#Item.ID %>">View and Edit user </a></td>
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>
