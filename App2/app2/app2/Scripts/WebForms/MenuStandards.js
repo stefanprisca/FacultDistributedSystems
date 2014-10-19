@@ -236,13 +236,13 @@ Sys.WebForms.MenuItem.prototype = {
     },
     hover: function(hovering) {
         if (hovering) {
-            var currentHoveredItem = this.container.hoveredMenuItem;
-            if (currentHoveredItem) {
-                currentHoveredItem.hover(false);
+            var currentHoverEDITem = this.container.hoveredMenuItem;
+            if (currentHoverEDITem) {
+                currentHoverEDITem.hover(false);
             }
-            var currentFocusedItem = this.container.focusedMenuItem;
-            if (currentFocusedItem && currentFocusedItem !== this) {
-                currentFocusedItem.hover(false);
+            var currentFocusEDITem = this.container.focusedMenuItem;
+            if (currentFocusEDITem && currentFocusEDITem !== this) {
+                currentFocusEDITem.hover(false);
             }
             this.applyUp(function(menuItem) {
                 if (menuItem.childMenu && !menuItem.childMenu.get_displayed()) {

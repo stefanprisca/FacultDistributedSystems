@@ -4610,9 +4610,9 @@ if ( !getSetAttribute ) {
 		set: nodeHook.set
 	};
 
-	// Set contenteditable to false on removals(#10429)
+	// Set contentEDITable to false on removals(#10429)
 	// Setting to empty string throws an error as an invalid value
-	jQuery.attrHooks.contenteditable = {
+	jQuery.attrHooks.contentEDITable = {
 		set: function( elem, value, name ) {
 			nodeHook.set( elem, value === "" ? false : value, name );
 		}
@@ -4690,7 +4690,7 @@ jQuery.each([
 	"colSpan",
 	"useMap",
 	"frameBorder",
-	"contentEditable"
+	"contentEDITable"
 ], function() {
 	jQuery.propFix[ this.toLowerCase() ] = this;
 });

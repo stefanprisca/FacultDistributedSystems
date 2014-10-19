@@ -22,6 +22,78 @@ namespace app2.Secured {
         protected global::System.Web.UI.WebControls.DataList UserDataList;
         
         /// <summary>
+        /// TextBox_INSERT_Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_INSERT_Name;
+        
+        /// <summary>
+        /// TextBox_INSERT_LoginId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_INSERT_LoginId;
+        
+        /// <summary>
+        /// TextBox_INSERT_LoginPW control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_INSERT_LoginPW;
+        
+        /// <summary>
+        /// TextBox_INSERT_HomeAddr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_INSERT_HomeAddr;
+        
+        /// <summary>
+        /// TextBox_INSERT_Birthday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_INSERT_Birthday;
+        
+        /// <summary>
+        /// TextBox_INSERT_Longitude control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_INSERT_Longitude;
+        
+        /// <summary>
+        /// TextBox_INSERT_Latitude control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_INSERT_Latitude;
+        
+        /// <summary>
+        /// CheckBox_INSERT_UType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckBox_INSERT_UType;
+        
+        /// <summary>
         /// UsersDataSource control.
         /// </summary>
         /// <remarks>
