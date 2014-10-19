@@ -16,14 +16,17 @@ namespace app2.Secured
         private HttpCookie clientCookie;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            clientCookie = Request.Cookies.Get(Constants.COOKIE_UTYPE);
+            if (clientCookie == null)
             {
-                clientCookie = Request.Cookies.Get(Constants.COOKIE_NAME);
-                if (clientCookie == null || !clientCookie.Value.Equals(Constants.ADMINISTRATOR_TYPE))
-                {
-                    LogOut(sender, e);
-                }
+
+                Response.Redirect("../Default");
             }
+            if (!clientCookie.Value.Equals(Constants.ADMINISTRATOR_TYPE))
+            {
+                LogOut(sender, e);
+            }
+
         }
 
         public IQueryable<APPLICATIONUSER> GetUsers()
@@ -41,7 +44,6 @@ namespace app2.Secured
             clientCookie.Value = null;
             Response.Cookies.Add(clientCookie);
             Response.Redirect("../Default");
-            db.Dispose();
         }
 
         public void InsertUser(object sender, EventArgs e)
@@ -95,14 +97,14 @@ namespace app2.Secured
                 {
                     return;
                 }
-                
+
                 user.NAME = ((TextBox)e.Item.FindControl(Constants.TEXTBOX_EDIT_NAME)).Text;
                 user.LOGINID = ((TextBox)e.Item.FindControl(Constants.TEXTBOX_EDIT_ID)).Text;
                 user.HOMEADDRESS = ((TextBox)e.Item.FindControl(Constants.TEXTBOX_EDIT_HMADDR)).Text;
                 user.BIRTHDATE = ((TextBox)e.Item.FindControl(Constants.TEXTBOX_EDIT_BDAY)).Text;
                 user.LONGITUDE = ((TextBox)e.Item.FindControl(Constants.TEXTBOX_EDIT_LONG)).Text;
                 user.LATITUDE = ((TextBox)e.Item.FindControl(Constants.TEXTBOX_EDIT_LAT)).Text;
-                
+
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
 

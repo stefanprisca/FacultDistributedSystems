@@ -7,7 +7,11 @@ namespace app2.Content
 {
     public class Constants
     {
-        public static readonly String COOKIE_NAME = "clientCookie";
+        public static readonly String COOKIE_UTYPE = "userTypeCookie";
+        public static readonly String COOKIE_UID = "userIdCookie";
+
+        public static readonly String SCRIPT_GOOGLE_API = "GoogleTimezoneApi";
+
         public static readonly String ADMINISTRATOR_TYPE = "user.administrator";
         public static readonly String REGULAR_TYPE = "user.regular";
         public static readonly String QUERRY_UID = "userId";
