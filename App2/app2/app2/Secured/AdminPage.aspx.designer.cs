@@ -13,12 +13,21 @@ namespace app2.Secured {
     public partial class AdminPage {
         
         /// <summary>
-        /// userList control.
+        /// UserDataList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView userList;
+        protected global::System.Web.UI.WebControls.DataList UserDataList;
+        
+        /// <summary>
+        /// UsersDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource UsersDataSource;
     }
 }

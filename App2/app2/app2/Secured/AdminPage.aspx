@@ -1,63 +1,90 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="AdminPage.aspx.cs" Inherits="app2.Secured.AdminPage" %>
+﻿<%@ Page EnableEventValidation="false" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="AdminPage.aspx.cs" Inherits="app2.Secured.AdminPage" %>
 
-<asp:Content runat="server"  ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <div class="row">
-     <asp:ListView ID="userList"
-                
-                ItemType="app2.Models.APPLICATIONUSER"
-                runat="server"
-                GroupItemCount="4"
-                SelectMethod="GetUsers"
-                >
-                <EmptyDataTemplate>
-                    <table >
-                        <tr>
-                            <td>No data was returned.</td>
-                        </tr>
-                    </table>
-                </EmptyDataTemplate>
-                <EmptyItemTemplate>
-                    <td/>
-                </EmptyItemTemplate>
-                <GroupTemplate>
-                    <tr id="itemPlaceholderContainer" runat="server">
-                        <td id="itemPlaceholder" runat="server"></td>
-                    </tr>
-                </GroupTemplate>
-                <ItemTemplate>
-                    <td runat="server">
-                        <table runat="server">
-                            
-                            <tr>
-                                <td> <span style="font-size:30px;"> <%#Item.NAME %></span></td>
-                                </tr>
-                            <tr>
-                                <td> <a href="UserEdit.aspx?<%#app2.Content.Constants.QUERRY_UID%>=<%#Item.ID %>">View and Edit user </a></td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </table>
-                    </td>
-                </ItemTemplate>
-                <LayoutTemplate>
-                    <table style="width:100%;">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <table id="groupPlaceholderContainer" runat="server" style="width:100%">
-                                        <tr id="groupPlaceholder"></tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <tr></tr>
-                        </tbody>
-                    </table>
-                </LayoutTemplate>
-            </asp:ListView>
-        <asp:button runat="server" OnClick="LogOut" Text="Log Out"/>
+<asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+    <div class="row" style="height: 610px">
+        <asp:DataList ID="UserDataList"
+            ItemType="app2.Models.APPLICATIONUSER"
+            runat="server"
+            SelectMethod="" Height="50px" Width="1110px"
+            DataSourceID="UsersDataSource" GridLines="Both" HorizontalAlign="Justify" RepeatColumns="5"
+            OnEditCommand="UserDataList_EditCommand"
+            OnCancelCommand="UserDataList_CancelCommand"
+            OnUpdateCommand="UserDataList_UpdateCommand"
+            OnDeleteCommand="UserDataList_DeleteCommand">
+
+            <EditItemTemplate>
+                Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("NAME", "{0}") %>'></asp:TextBox>
+                <br />
+                LoginID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Eval("LOGINID", "{0}") %>'></asp:TextBox>
+                <br />
+                LoginPw:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Eval("LOGINPW") %>'></asp:TextBox>
+                <br />
+                Birthday:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Eval("BIRTHDATE", "{0}") %>'></asp:TextBox>
+                <br />
+                Longitude:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:TextBox ID="TextBox5" runat="server" Text='<%# Eval("LONGITUDE", "{0}") %>'></asp:TextBox>
+                <br />
+                Latitude:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:TextBox ID="TextBox6" runat="server" Text='<%# Eval("LATITUDE", "{0}") %>'></asp:TextBox>
+                <br />
+                <br />
+                <div style="text-align: center; font-size: small">
+                    <asp:LinkButton ID="Update" runat="server" Text="Update" CommandName="Update" />
+                </div>
+                <hr />
+                <div style="text-align: center; font-size: small">
+                    <asp:LinkButton ID="Cancel" runat="server" CommandName="Cancel" Text="Cancel" />
+                </div>
+            </EditItemTemplate>
+            <ItemStyle BorderColor="#333300" BorderStyle="Solid" />
+
+            <ItemTemplate>
+                <asp:Label Font-Size="Large" Font-Bold="true" Text='<%# Eval("NAME") %>' runat="server" ID="NAMELabel" /><br />
+
+                BIRTHDATE:
+                <asp:Label Text='<%# Eval("BIRTHDATE") %>' runat="server" ID="BIRTHDATELabel" /><br />
+                HOMEADDRESS:
+                <asp:Label Text='<%# Eval("HOMEADDRESS") %>' runat="server" ID="HOMEADDRESSLabel" /><br />
+                LOGINID:
+                <asp:Label Text='<%# Eval("LOGINID") %>' runat="server" ID="LOGINIDLabel" /><br />
+                LATITUDE:
+                <asp:Label Text='<%# Eval("LATITUDE") %>' runat="server" ID="LATITUDELabel" /><br />
+                LONGITUDE:
+                <asp:Label Text='<%# Eval("LONGITUDE") %>' runat="server" ID="LONGITUDELabel" /><br />
+                TYPE:
+                <asp:Label Text='<%# Eval("TYPE") %>' runat="server" ID="TYPELabel" />
+                <br />
+                <br />
+                <div style="text-align: center; font-size: small">
+                    <asp:LinkButton ID="EditButton"
+                        Text="Edit"
+                        CommandName="Edit"
+                        runat="server" />
+                </div>
+                <hr />
+                <div style="text-align: center; font-size: small">
+                    <asp:LinkButton ID="DeleteButton"
+                        Text="Delete"
+                        CommandName="Delete"
+                        runat="server" />
+                </div>
+                <br />
+
+            </ItemTemplate>
+
+
+
+            <SelectedItemStyle BackColor="#FF9900" />
+            <SeparatorStyle BorderColor="#660033" BorderStyle="Double" />
+
+
+
+        </asp:DataList>
+        <asp:ObjectDataSource runat="server" ID="UsersDataSource" SelectMethod="GetUsers" TypeName="app2.Secured.AdminPage"></asp:ObjectDataSource>
+        <asp:Button runat="server" OnClick="LogOut" Text="Log Out" />
     </div>
 </asp:Content>

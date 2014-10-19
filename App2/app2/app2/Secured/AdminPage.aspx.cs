@@ -21,12 +21,17 @@ namespace app2.Secured
             clientCookie = Request.Cookies.Get(Constants.COOKIE_NAME);
             if (clientCookie == null || !clientCookie.Value.Equals(Constants.ADMINISTRATOR_TYPE))
             {
-                Response.Redirect("../Default");
+                LogOut(sender, e);
             }
+
         }
 
         public IQueryable<APPLICATIONUSER> GetUsers()
         {
+            if (db == null)
+            {
+                db = new ds_assign1Entities();
+            }
             return db.APPLICATIONUSERs;
         }
 
@@ -39,5 +44,27 @@ namespace app2.Secured
             db.Dispose();
         }
 
+
+
+        protected void UserDataList_EditCommand(object source, DataListCommandEventArgs e)
+        { 
+            UserDataList.EditItemIndex = e.Item.ItemIndex; 
+            UserDataList.DataBind(); 
+        }
+
+        protected void UserDataList_CancelCommand(object source, DataListCommandEventArgs e)
+        {
+            UserDataList.EditItemIndex = -1;
+            UserDataList.DataBind();
+        }
+
+        protected void UserDataList_UpdateCommand(object source, DataListCommandEventArgs e)
+        {
+           //todo
+        }
+        protected void UserDataList_DeleteCommand(object source, DataListCommandEventArgs e)
+        {
+            //todo
+        }
     }
 }
