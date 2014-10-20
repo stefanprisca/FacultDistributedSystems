@@ -27,11 +27,11 @@
                 Birthday:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="TextBox_Edit_Birthday" runat="server" Text='<%# Eval("BIRTHDATE") %>'></asp:TextBox>
                 <br />
-                Longitude:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:TextBox ID="TextBox_Edit_Longitude" runat="server" Text='<%# Eval("LONGITUDE") %>'></asp:TextBox>
-                <br />
                 Latitude:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="TextBox_Edit_Latitude" runat="server" Text='<%# Eval("LATITUDE") %>'></asp:TextBox>
+                <br />
+                Longitude:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:TextBox ID="TextBox_Edit_Longitude" runat="server" Text='<%# Eval("LONGITUDE") %>'></asp:TextBox>
                 <br />
                 <br />
                 <div style="text-align: center; font-size: small">
@@ -90,25 +90,23 @@
         <div>
             <h2>Add User</h2>
             <hr />
-            Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="TextBox_INSERT_Name" runat="server"></asp:TextBox>
             <br />
-            LoginID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:TextBox ID="TextBox_INSERT_LoginId" runat="server"></asp:TextBox>
+            Login ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="TextBox_INSERT_LoginId" runat="server"></asp:TextBox>
             <br />
-            LoginID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:TextBox ID="TextBox_INSERT_LoginPW" TextMode="Password" runat="server"></asp:TextBox>
+            Login PW:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="TextBox_INSERT_LoginPW" TextMode="Password" runat="server"></asp:TextBox>
             <br />
-            Home Address:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Home Address:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="TextBox_INSERT_HomeAddr" runat="server"></asp:TextBox>
             <br />
-            Birthday:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Birthday:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="TextBox_INSERT_Birthday" runat="server"></asp:TextBox>
             <br />
-            Longitude:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Longitude:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="TextBox_INSERT_Longitude" runat="server"></asp:TextBox>
             <br />
-            Latitude:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Latitude:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="TextBox_INSERT_Latitude" runat="server"></asp:TextBox>
             <br />
             Admin Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -116,7 +114,7 @@
             <br />
             <br />
             <div style="text-align: left; font-size: small">
-                <asp:Button runat="server" type="button" OnClick="InsertUser" Text="Save"/>
+                <asp:Button runat="server" type="button" OnClick="InsertUser" Text="Save" />
             </div>
             <br />
         </div>
@@ -124,5 +122,5 @@
         <asp:ObjectDataSource runat="server" ID="UsersDataSource" SelectMethod="GetUsers" TypeName="app2.Secured.AdminPage"></asp:ObjectDataSource>
         <asp:Button runat="server" OnClick="LogOut" Text="Log Out" />
     </div>
-            <hr />
-            </asp:Content>
+    <hr />
+</asp:Content>
