@@ -1,4 +1,4 @@
-package ro.stefanprisca.distsystems.app3.server.resources;
+package ro.stefanprisca.distsystems.app3.server.core;
 
 public class Constants {
 
