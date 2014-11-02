@@ -1,0 +1,25 @@
+.jobTable{   
+   border-collapse:collapse;
+   border:1px solid #000000;
+}
+
+.jobTableHeader{
+   text-align:center;
+   background:none repeat scroll 0 0 #B5B5B5;
+   border-bottom:1px solid #000000;  
+   padding:2px;
+}
+
+.jobTableOddRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #FFFFFFF;	
+}
+
+.jobTableEvenRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #D3D3D3;
+}
+
+.jobTableContent{
+	margin: 20px;
+}
