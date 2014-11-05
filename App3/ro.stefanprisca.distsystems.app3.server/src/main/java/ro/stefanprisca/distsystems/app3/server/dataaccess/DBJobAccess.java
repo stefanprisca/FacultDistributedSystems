@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import ro.stefanprisca.distsystems.app3.common.IJob;
-import ro.stefanprisca.distsystems.app3.server.core.Constants;
+import ro.stefanprisca.distsystems.app3.internal.server.Constants;
 
 @SuppressWarnings("unchecked")
 public class DBJobAccess {

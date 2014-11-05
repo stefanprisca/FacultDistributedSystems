@@ -1,4 +1,4 @@
-package ro.stefanprisca.distsystems.app3.server.core;
+package ro.stefanprisca.distsystems.app3.internal.server;
 
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;

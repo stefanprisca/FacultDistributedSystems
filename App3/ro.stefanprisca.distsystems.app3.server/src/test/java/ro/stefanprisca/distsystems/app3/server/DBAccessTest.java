@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import ro.stefanprisca.distsystems.app3.server.core.Constants;
+import ro.stefanprisca.distsystems.app3.internal.server.Constants;
 import ro.stefanprisca.distsystems.app3.server.models.Job;
 import ro.stefanprisca.distsystems.app3.server.models.JobCategory;
 
