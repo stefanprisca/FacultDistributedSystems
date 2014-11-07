@@ -5,8 +5,32 @@
   <import namespace="http://login.utils.distsystems.stefanprisca.ro/" schemaLocation="defaultloginutils_schema1.xsd"/>
 </schema>
   </wsdl:types>
+  <wsdl:message name="getUsersResponse">
+    <wsdl:part name="parameters" element="tns:getUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveUsersResponse">
+    <wsdl:part name="parameters" element="tns:saveUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getConfStringResponse">
     <wsdl:part name="parameters" element="tns:getConfStringResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsers">
+    <wsdl:part name="parameters" element="tns:getUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="doLoginResponse">
+    <wsdl:part name="parameters" element="tns:doLoginResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveUsers">
+    <wsdl:part name="parameters" element="tns:saveUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="doLogin">
+    <wsdl:part name="parameters" element="tns:doLogin">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getConfString">
@@ -14,6 +38,24 @@
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="ILoginUtils">
+    <wsdl:operation name="getUsers">
+      <wsdl:input name="getUsers" message="tns:getUsers">
+    </wsdl:input>
+      <wsdl:output name="getUsersResponse" message="tns:getUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveUsers">
+      <wsdl:input name="saveUsers" message="tns:saveUsers">
+    </wsdl:input>
+      <wsdl:output name="saveUsersResponse" message="tns:saveUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doLogin">
+      <wsdl:input name="doLogin" message="tns:doLogin">
+    </wsdl:input>
+      <wsdl:output name="doLoginResponse" message="tns:doLoginResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getConfString">
       <wsdl:input name="getConfString" message="tns:getConfString">
     </wsdl:input>
@@ -23,6 +65,33 @@
   </wsdl:portType>
   <wsdl:binding name="DefaultLoginUtilsServiceSoapBinding" type="tns:ILoginUtils">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getUsers">
+      <soap:operation soapAction="urn:GetUsers" style="document"/>
+      <wsdl:input name="getUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveUsers">
+      <soap:operation soapAction="urn:SaveUsers" style="document"/>
+      <wsdl:input name="saveUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doLogin">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="doLogin">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="doLoginResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getConfString">
       <soap:operation soapAction="urn:GetConfString" style="document"/>
       <wsdl:input name="getConfString">
