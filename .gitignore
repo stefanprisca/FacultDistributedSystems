@@ -1,5 +1,6 @@
 ## no archives
 ro.*/*.jar
+utils/WebContent/WEB-INF/lib/*.jar
 *.zip
 *.gz
 *.uml
