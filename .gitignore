@@ -1,6 +1,6 @@
 ## no archives
 ro.*/*.jar
-utils/WebContent/WEB-INF/lib/*.jar
+utils/ro.stefanprisca.distsystems.utils.login/WebContent/WEB-INF/lib/*.jar
 *.zip
 *.gz
 *.uml

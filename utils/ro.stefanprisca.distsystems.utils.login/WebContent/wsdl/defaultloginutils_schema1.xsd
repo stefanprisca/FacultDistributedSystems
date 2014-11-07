@@ -1,0 +1,17 @@
+<xs:schema xmlns:tns="http://login.utils.distsystems.stefanprisca.ro/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://login.utils.distsystems.stefanprisca.ro/" version="1.0">
+
+  <xs:element name="getConfString" type="tns:getConfString"/>
+
+  <xs:element name="getConfStringResponse" type="tns:getConfStringResponse"/>
+
+  <xs:complexType name="getConfString">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getConfStringResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

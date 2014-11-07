@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="DefaultLoginUtilsService" targetNamespace="http://login.utils.distsystems.stefanprisca.ro/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://login.utils.distsystems.stefanprisca.ro/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://login.utils.distsystems.stefanprisca.ro/" schemaLocation="defaultloginutils_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="getConfStringResponse">
+    <wsdl:part name="parameters" element="tns:getConfStringResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getConfString">
+    <wsdl:part name="parameters" element="tns:getConfString">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ILoginUtils">
+    <wsdl:operation name="getConfString">
+      <wsdl:input name="getConfString" message="tns:getConfString">
+    </wsdl:input>
+      <wsdl:output name="getConfStringResponse" message="tns:getConfStringResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DefaultLoginUtilsServiceSoapBinding" type="tns:ILoginUtils">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getConfString">
+      <soap:operation soapAction="urn:GetConfString" style="document"/>
+      <wsdl:input name="getConfString">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getConfStringResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DefaultLoginUtilsService">
+    <wsdl:port name="DefaultLoginUtilsPort" binding="tns:DefaultLoginUtilsServiceSoapBinding">
+      <soap:address location="http://localhost:8080/ro.stefanprisca.distsystems.utils.login/services"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
