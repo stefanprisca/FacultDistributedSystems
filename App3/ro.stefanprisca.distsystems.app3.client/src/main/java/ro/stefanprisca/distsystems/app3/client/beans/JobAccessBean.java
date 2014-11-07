@@ -8,10 +8,16 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+
 import ro.stefanprisca.distsystems.app3.common.Constants;
 import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.common.IJobAccessProvider;
 import ro.stefanprisca.distsystems.app3.common.Messages;
+import ro.stefanprisca.distsystems.utils.login.webservice.ILogInUtils;
+import ro.stefanprisca.distsystems.utils.login.webservice.WebServicePublisher;
 
 @SessionScoped
 @ManagedBean(name = "jobAccess", eager = true)
@@ -31,7 +37,7 @@ public class JobAccessBean {
 		}
 
 		jobAccessProvider = partProvider;
-		setJobs();
+		// setJobs();
 	}
 
 	private String getServerMessage() {
@@ -71,5 +77,19 @@ public class JobAccessBean {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getLoginServiceResponse() {
+		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+		factory.getInInterceptors().add(new LoggingInInterceptor());
+		factory.getOutInterceptors().add(new LoggingOutInterceptor());
+		factory.setServiceClass(ILogInUtils.class);
+
+		String endpointAddress = "http://localhost:8080/services/login_utils";
+
+		factory.setAddress(WebServicePublisher.SERVICE_ADDRESS);
+		ILogInUtils logins = (ILogInUtils) factory.create();
+
+		return logins.connectConfirm("Stefan");
 	}
 }

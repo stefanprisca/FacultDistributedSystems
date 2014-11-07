@@ -29,27 +29,22 @@ public class JobBean implements IJob {
 	}
 
 	public String getJobSpecification() throws RemoteException {
-		// TODO Auto-generated method stub
 		return job.getJobSpecification();
 	}
 
 	public String getTitle() throws RemoteException {
-		// TODO Auto-generated method stub
 		return job.getTitle();
 	}
 
 	public String getCompName() throws RemoteException {
-		// TODO Auto-generated method stub
 		return job.getCompName();
 	}
 
 	public String getDisplayCategories() throws RemoteException {
-		// TODO Auto-generated method stub
 		return job.getDisplayCategories();
 	}
 
 	public Boolean getTaken() throws RemoteException {
-		// TODO Auto-generated method stub
 		return job.getTaken();
 	}
 
