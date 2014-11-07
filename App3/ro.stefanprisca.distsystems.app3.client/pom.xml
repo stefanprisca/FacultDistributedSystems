@@ -18,8 +18,8 @@
 
 	<dependencies>
 
-	<!-- Apache cfx depends -->
-		
+		<!-- Apache cfx depends -->
+
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxws</artifactId>
@@ -37,7 +37,7 @@
 			<artifactId>spring-web</artifactId>
 			<version>4.1.1.RELEASE</version>
 		</dependency>
-	
+
 		<!-- Javax dependencies -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -71,14 +71,14 @@
 			</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
+		<!-- Login Utils -->
 		<dependency>
 			<groupId>ro.stefanprisca.distsystems</groupId>
-			<artifactId>
-				ro.stefanprisca.distsystems.utils.login
-			</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			</dependency>
+			<artifactId>ro.stefanprisca.distsystems.utils.login</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>ro.stefanprisca.distsystems.app3.client</finalName>

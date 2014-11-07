@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>JSF tutorial</title>
+	<h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+	<h1>Hello #{userManager.user.name} !</h1>
+
+	<h:form>
+		<h:commandButton id="button" value="LogOut"
+			action="#{adminManager.doLogout}" />
+		<br />
+		<h:outputStylesheet library="css" name="style.css" />
+		<h:dataTable value="#{adminManager.users}" var="user"
+			styleClass="userTable" headerClass="userTableHeader"
+			rowClasses="userTableOddRow,userTableEvenRow">
+			<h:column>
+				<f:facet name="header">Login ID</f:facet>
+				<h:inputText value="#{user.loginID}" size="20"
+					rendered="#{user.canEdit}" />
+				<h:outputText value="#{user.loginID}" rendered="#{not user.canEdit}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Login PW</f:facet>
+				<h:inputText value="#{user.loginPW}" size="20"
+					rendered="#{user.canEdit}" />
+				<h:outputText value="#{user.loginPW}" rendered="#{not user.canEdit}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				<h:inputText value="#{user.name}" size="20"
+					rendered="#{user.canEdit}" />
+				<h:outputText value="#{user.name}" rendered="#{not user.canEdit}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Birthday</f:facet>
+				<h:inputText value="#{user.birthDate}" size="20"
+					rendered="#{user.canEdit}" />
+				<h:outputText value="#{user.birthDate}"
+					rendered="#{not user.canEdit}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Home Address</f:facet>
+				<h:inputText value="#{user.homeAddress}" size="20"
+					rendered="#{user.canEdit}" />
+				<h:outputText value="#{user.homeAddress}"
+					rendered="#{not user.canEdit}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Latitude</f:facet>
+				<h:inputText value="#{user.latitude}" size="20"
+					rendered="#{user.canEdit}" />
+				<h:outputText value="#{user.latitude}"
+					rendered="#{not user.canEdit}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Longitude</f:facet>
+				<h:inputText value="#{user.longitude}" size="20"
+					rendered="#{user.canEdit}" />
+				<h:outputText value="#{user.longitude}"
+					rendered="#{not user.canEdit}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Edit</f:facet>
+				<h:commandButton value="Edit"
+					action="#{adminManager.editUser(user)}"
+					rendered="#{not user.canEdit}">
+				</h:commandButton>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+				<h:commandButton value="Delete"
+					action="#{adminManager.deleteUser(user)}"
+					rendered="#{not user.canEdit}">
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+		<h:commandButton value="Save Employees"
+			action="#{adminManager.saveUsers}" />
+
+		<h3>Add User</h3>
+		<hr />
+		<table>
+			<tr>
+				<td>Name :</td>
+				<td><h:inputText size="10" value="#{adminManager.newUser.name}" /></td>
+			</tr>
+			<tr>
+				<td>Birthday :</td>
+				<td><h:inputText size="20"
+						value="#{adminManager.newUser.birthDate}" /></td>
+			</tr>
+			<tr>
+				<td>Home Address :</td>
+				<td><h:inputText size="20"
+						value="#{adminManager.newUser.homeAddress}" /></td>
+			</tr>
+			<tr>
+				<td>Longitude :</td>
+				<td><h:inputText size="5"
+						value="#{adminManager.newUser.longitude}" /></td>
+			</tr>
+			<tr>
+				<td>Latitude :</td>
+				<td><h:inputText size="5"
+						value="#{adminManager.newUser.latitude}" /></td>
+			</tr>
+			<tr>
+				<td>Login ID :</td>
+				<td><h:inputText size="10"
+						value="#{adminManager.newUser.loginID}" /></td>
+			</tr>
+			<tr>
+				<td>Login PW :</td>
+				<td><h:inputText size="10"
+						value="#{adminManager.newUser.loginPW}" /></td>
+			</tr>
+			<tr>
+				<td>Add Administrator</td>
+				<td><h:selectBooleanCheckbox value="#{adminManager.userType}" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><h:commandButton value="Add User"
+						action="#{adminManager.addUser}" /></td>
+			</tr>
+		</table>
+	</h:form>
+
+</h:body>
+</html>

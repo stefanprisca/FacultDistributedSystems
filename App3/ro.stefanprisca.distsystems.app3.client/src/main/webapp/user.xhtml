@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"htth://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"     
+      xmlns:h="http://java.sun.com/jsf/html">
+  
+    <h:head>
+        <title>Login form</title>
+    </h:head>
+    <h:body>
+	<h1>#{jobAccess.serverMsg} !</h1>
+	<p> The web service says #{jobAccess.loginServiceResponse}</p>
+	<h:form>
+		
+		<h:outputStylesheet library="css" name="style.css" />
+		<h:dataTable value="#{jobAccess.jobs}" var="job"
+			styleClass="jobTable" headerClass="jobTableHeader"
+			rowClasses="jobTableOddRow,jobTableEvenRow">
+			<h:column>
+				<f:facet name="header">Job Title</f:facet>
+				
+				<h:outputText styleClass="jobTableContent" value="#{job.title}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Job Deadline</f:facet>
+				<h:outputText styleClass="jobTableContent" value="#{job.deadline}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Contact Details</f:facet>
+				<h:outputText styleClass="jobTableContent" value="#{job.contactDetails}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Company</f:facet>
+				<h:outputText styleClass="jobTableContent" value="#{job.compName}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Specification</f:facet>
+				<h:outputText styleClass="jobTableContent" value="#{job.jobSpecification}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Taken</f:facet>
+				<h:outputText styleClass="jobTableContent" value="#{job.taken}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Categories</f:facet>
+				<h:outputText styleClass="jobTableContent" value="#{job.displayCategories}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Take Job!</f:facet>
+				<h:commandButton value="Take">
+				</h:commandButton>
+			</h:column>
+			
+		</h:dataTable>
+		
+	</h:form>
+
+</h:body>
+</html>

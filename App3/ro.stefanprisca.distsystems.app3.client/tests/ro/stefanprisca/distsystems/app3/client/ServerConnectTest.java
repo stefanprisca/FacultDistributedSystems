@@ -28,6 +28,7 @@ public class ServerConnectTest {
 	@Test
 	public void testLoginServiceConnection() {
 		JobAccessBean jab = new JobAccessBean();
+		System.out.println(jab.getLoginServiceResponse());
 		assertTrue(jab.getLoginServiceResponse() != null);
 	}
 }

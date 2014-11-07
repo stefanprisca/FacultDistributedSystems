@@ -54,6 +54,7 @@ public class ServiceTest {
 		client.saveUsers(users);
 
 		assertTrue(client.getUsers().get(0).getName().equals(newName));
+
 	}
 
 	@Test

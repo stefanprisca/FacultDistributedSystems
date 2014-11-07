@@ -26,5 +26,12 @@ public interface ILoginUtils {
 
 	@WebMethod(operationName = "doLogin", action = "urn:DoLogin")
 	@WebResult(name = "return")
-	public abstract String doLogin(@WebParam(name = "arg0") String loginReqID, @WebParam(name = "arg1") String loginReqPW);
+	public abstract String doLogin(@WebParam(name = "arg0") String loginReqID,
+			@WebParam(name = "arg1") String loginReqPW);
+
+	@WebMethod(operationName = "addUser", action = "urn:AddUser")
+	public abstract void addUser(@WebParam(name = "arg0") ApplicationUser newUser);
+
+	@WebMethod(operationName = "deleteUser", action = "urn:DeleteUser")
+	public abstract void deleteUser(@WebParam(name = "arg0") ApplicationUser user);
 }

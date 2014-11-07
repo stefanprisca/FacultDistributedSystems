@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=ro.stefanprisca.distsystems.utils.login.jar -DgroupId=ro.stefanprisca.distsystems -DartifactId=ro.stefanprisca.distsystems.utils.login -Dversion=0.1.0 -Dpackaging=jar -DgeneratePom=true

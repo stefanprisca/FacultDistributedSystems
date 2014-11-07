@@ -5,6 +5,10 @@
   <import namespace="http://login.utils.distsystems.stefanprisca.ro/" schemaLocation="defaultloginutils_schema1.xsd"/>
 </schema>
   </wsdl:types>
+  <wsdl:message name="deleteUserResponse">
+    <wsdl:part name="parameters" element="tns:deleteUserResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getUsersResponse">
     <wsdl:part name="parameters" element="tns:getUsersResponse">
     </wsdl:part>
@@ -13,8 +17,20 @@
     <wsdl:part name="parameters" element="tns:saveUsersResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="addUserResponse">
+    <wsdl:part name="parameters" element="tns:addUserResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getConfStringResponse">
     <wsdl:part name="parameters" element="tns:getConfStringResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteUser">
+    <wsdl:part name="parameters" element="tns:deleteUser">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addUser">
+    <wsdl:part name="parameters" element="tns:addUser">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getUsers">
@@ -38,6 +54,18 @@
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="ILoginUtils">
+    <wsdl:operation name="deleteUser">
+      <wsdl:input name="deleteUser" message="tns:deleteUser">
+    </wsdl:input>
+      <wsdl:output name="deleteUserResponse" message="tns:deleteUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addUser">
+      <wsdl:input name="addUser" message="tns:addUser">
+    </wsdl:input>
+      <wsdl:output name="addUserResponse" message="tns:addUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getUsers">
       <wsdl:input name="getUsers" message="tns:getUsers">
     </wsdl:input>
@@ -65,6 +93,24 @@
   </wsdl:portType>
   <wsdl:binding name="DefaultLoginUtilsServiceSoapBinding" type="tns:ILoginUtils">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="deleteUser">
+      <soap:operation soapAction="urn:DeleteUser" style="document"/>
+      <wsdl:input name="deleteUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addUser">
+      <soap:operation soapAction="urn:AddUser" style="document"/>
+      <wsdl:input name="addUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getUsers">
       <soap:operation soapAction="urn:GetUsers" style="document"/>
       <wsdl:input name="getUsers">
@@ -84,7 +130,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="doLogin">
-      <soap:operation soapAction="" style="document"/>
+      <soap:operation soapAction="urn:DoLogin" style="document"/>
       <wsdl:input name="doLogin">
         <soap:body use="literal"/>
       </wsdl:input>

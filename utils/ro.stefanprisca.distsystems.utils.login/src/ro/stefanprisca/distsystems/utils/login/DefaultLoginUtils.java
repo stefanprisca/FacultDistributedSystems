@@ -21,6 +21,11 @@ public class DefaultLoginUtils implements ILoginUtils {
 	public DefaultLoginUtils() {
 		factory = Persistence
 				.createEntityManagerFactory(Constants.PERSISTENCE_UNIT_NAME);
+		EntityManager em = factory.createEntityManager();
+		// read the existing entries and write to console
+		Query q = em.createQuery("select t from ApplicationUser t");
+		this.users = q.getResultList();
+		em.close();
 	}
 
 	@WebMethod(operationName = "getConfString", action = "urn:GetConfString")
@@ -45,10 +50,11 @@ public class DefaultLoginUtils implements ILoginUtils {
 	public void saveUsers(List<ApplicationUser> users) {
 		EntityManager em = factory.createEntityManager();
 
+		this.users = users;
+
 		for (ApplicationUser user : users) {
 			user.setCanEdit(false);
 			em.getTransaction().begin();
-			// System.out.println(user.getId());
 			ApplicationUser old = em.find(ApplicationUser.class, user.getId());
 			if (old != null) {
 				old.setBirthDate(user.getBirthDate());
@@ -62,22 +68,34 @@ public class DefaultLoginUtils implements ILoginUtils {
 			} else {
 				old = user;
 			}
+
 			em.getTransaction().commit();
 		}
 
-		if (users.size() < this.users.size()) {
-			em.getTransaction().begin();
-			for (ApplicationUser user : this.users) {
-				if (!users.contains(user)) {
-					this.users.remove(user);
-					em.remove(user);
-				}
-			}
-			em.getTransaction().commit();
+		em.close();
+	}
+
+	public void addUser(ApplicationUser newUser) {
+
+		users.add(newUser);
+
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		if (!em.contains(newUser)) {
+			em.persist(newUser);
 		}
+		em.getTransaction().commit();
+		em.close();
+	}
 
-		this.users = users;
-
+	public void deleteUser(ApplicationUser user) {
+		this.users.remove(user);
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		if (em.contains(em.find(ApplicationUser.class, user.getId()))) {
+			em.remove(em.find(ApplicationUser.class, user.getId()));
+		}
+		em.getTransaction().commit();
 		em.close();
 	}
 

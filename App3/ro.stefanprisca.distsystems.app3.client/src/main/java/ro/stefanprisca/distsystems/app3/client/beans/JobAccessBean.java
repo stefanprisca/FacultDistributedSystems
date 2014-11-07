@@ -16,8 +16,7 @@ import ro.stefanprisca.distsystems.app3.common.Constants;
 import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.common.IJobAccessProvider;
 import ro.stefanprisca.distsystems.app3.common.Messages;
-import ro.stefanprisca.distsystems.utils.login.webservice.ILogInUtils;
-import ro.stefanprisca.distsystems.utils.login.webservice.WebServicePublisher;
+import ro.stefanprisca.distsystems.utils.login.ILoginUtils;
 
 @SessionScoped
 @ManagedBean(name = "jobAccess", eager = true)
@@ -37,7 +36,7 @@ public class JobAccessBean {
 		}
 
 		jobAccessProvider = partProvider;
-		// setJobs();
+		setJobs();
 	}
 
 	private String getServerMessage() {
@@ -80,16 +79,14 @@ public class JobAccessBean {
 	}
 
 	public String getLoginServiceResponse() {
+
 		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
 		factory.getInInterceptors().add(new LoggingInInterceptor());
 		factory.getOutInterceptors().add(new LoggingOutInterceptor());
-		factory.setServiceClass(ILogInUtils.class);
+		factory.setServiceClass(ILoginUtils.class);
+		factory.setAddress(ro.stefanprisca.distsystems.utils.login.Constants.SERVICE_ADDRESS);
+		ILoginUtils client = (ILoginUtils) factory.create();
 
-		String endpointAddress = "http://localhost:8080/services/login_utils";
-
-		factory.setAddress(WebServicePublisher.SERVICE_ADDRESS);
-		ILogInUtils logins = (ILogInUtils) factory.create();
-
-		return logins.connectConfirm("Stefan");
+		return client.getConfString();
 	}
 }
