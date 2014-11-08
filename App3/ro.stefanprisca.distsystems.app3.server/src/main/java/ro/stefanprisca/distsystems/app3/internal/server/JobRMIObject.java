@@ -2,6 +2,7 @@ package ro.stefanprisca.distsystems.app3.internal.server;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Date;
 
 import ro.stefanprisca.distsystems.app3.common.IJob;
 
@@ -10,7 +11,7 @@ public class JobRMIObject extends UnicastRemoteObject implements IJob {
 	private static final long serialVersionUID = -5427085641948815986L;
 	private String title;
 	private String compName;
-	private String deadline;
+	private Date deadline;
 	private String contactDetails;
 	private String jobSpecification;
 	private Boolean taken;
@@ -37,7 +38,7 @@ public class JobRMIObject extends UnicastRemoteObject implements IJob {
 		return compName;
 	}
 
-	public String getDeadline() {
+	public Date getDeadline() {
 		return deadline;
 	}
 

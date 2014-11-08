@@ -11,7 +11,7 @@ import ro.stefanprisca.distsystems.app3.client.beans.ApplicationUserManager;
 import ro.stefanprisca.distsystems.app3.client.beans.NavigationBean;
 
 @RunWith(JUnit4.class)
-public class LogInTest {
+public class LoginWebServiceTest {
 	private ApplicationUserManager usermanager;
 	private NavigationBean navbean;
 

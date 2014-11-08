@@ -1,6 +1,7 @@
 package ro.stefanprisca.distsystems.app3.client.beans;
 
 import java.rmi.RemoteException;
+import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -20,7 +21,7 @@ public class JobBean implements IJob {
 		this.job = job;
 	}
 
-	public String getDeadline() throws RemoteException {
+	public Date getDeadline() throws RemoteException {
 		return job.getDeadline();
 	}
 

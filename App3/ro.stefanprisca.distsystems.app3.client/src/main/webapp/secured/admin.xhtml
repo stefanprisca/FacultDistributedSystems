@@ -17,8 +17,8 @@
 		<br />
 		<h:outputStylesheet library="css" name="style.css" />
 		<h:dataTable value="#{adminManager.users}" var="user"
-			styleClass="userTable" headerClass="userTableHeader"
-			rowClasses="userTableOddRow,userTableEvenRow">
+			styleClass="table" headerClass="tableHeader"
+			rowClasses="tableOddRow,tableEvenRow">
 			<h:column>
 				<f:facet name="header">Login ID</f:facet>
 				<h:inputText value="#{user.loginID}" size="20"

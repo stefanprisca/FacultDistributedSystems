@@ -8,15 +8,10 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-
 import ro.stefanprisca.distsystems.app3.common.Constants;
 import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.common.IJobAccessProvider;
 import ro.stefanprisca.distsystems.app3.common.Messages;
-import ro.stefanprisca.distsystems.utils.login.ILoginUtils;
 
 @SessionScoped
 @ManagedBean(name = "jobAccess", eager = true)
@@ -24,6 +19,8 @@ public class JobAccessBean {
 
 	private final IJobAccessProvider jobAccessProvider;
 	private List<JobBean> jobs;
+	private List<String> selectedCategories;
+	private List<String> jobCategories;
 
 	public JobAccessBean() {
 		IJobAccessProvider partProvider;
@@ -39,30 +36,13 @@ public class JobAccessBean {
 		setJobs();
 	}
 
-	private String getServerMessage() {
+	public String getServerMsg() {
 		try {
 			return jobAccessProvider == null ? Messages.JOBPROVIDER_RETRIEVAL_ERROR
 					: jobAccessProvider.getServerStartupConfirm();
 		} catch (RemoteException e) {
 			return Messages.JOBPROVIDER_METHOD_CALL_ERROR;
 		}
-	}
-
-	public String getServerMsg() {
-		return getServerMessage();
-	}
-
-	public String getJobsByCategory(String... categories) {
-		try {
-			List<IJob> jobs = jobAccessProvider.getJobs(categories);
-			return jobs.toString();
-		} catch (RemoteException e) {
-			return Messages.JOBPROVIDER_METHOD_CALL_ERROR;
-		}
-	}
-
-	public List<JobBean> getJobs() {
-		return jobs;
 	}
 
 	public void setJobs() {
@@ -78,15 +58,54 @@ public class JobAccessBean {
 		}
 	}
 
-	public String getLoginServiceResponse() {
-
-		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-		factory.getInInterceptors().add(new LoggingInInterceptor());
-		factory.getOutInterceptors().add(new LoggingOutInterceptor());
-		factory.setServiceClass(ILoginUtils.class);
-		factory.setAddress(ro.stefanprisca.distsystems.utils.login.Constants.SERVICE_ADDRESS);
-		ILoginUtils client = (ILoginUtils) factory.create();
-
-		return client.getConfString();
+	public void setJobs(List<IJob> externalJobs) {
+		this.jobs = new ArrayList<JobBean>();
+		for (IJob job : externalJobs) {
+			JobBean jb = new JobBean(job);
+			this.jobs.add(jb);
+		}
 	}
+
+	public List<JobBean> getJobs() {
+		return jobs;
+	}
+
+	public String filterJobs() {
+		System.out.println("Displaying selected categories: ");
+		try {
+			List<IJob> jobs = jobAccessProvider.getJobs(selectedCategories,
+					null, null);
+			setJobs(jobs);
+		} catch (RemoteException e) {
+			return Messages.JOBPROVIDER_METHOD_CALL_ERROR;
+		}
+		return null;
+	}
+
+	public String resetFilters() {
+		setJobs();
+		return null;
+	}
+
+	public List<String> getJobCategories() {
+		this.jobCategories = new ArrayList<String>();
+		try {
+			this.jobCategories.addAll(jobAccessProvider.getJobCategories());
+		} catch (RemoteException e) {
+		}
+		return this.jobCategories;
+	}
+
+	public void setJobCategories(List<String> jobCategories) {
+		this.jobCategories = jobCategories;
+	}
+
+	public List<String> getSelectedCategories() {
+		return selectedCategories;
+	}
+
+	public void setSelectedCategories(List<String> selectedCategories) {
+		this.selectedCategories = selectedCategories;
+	}
+
 }

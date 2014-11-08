@@ -2,9 +2,10 @@ package ro.stefanprisca.distsystems.app3.common;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Date;
 
 public interface IJob extends Remote {
-	public String getDeadline() throws RemoteException;
+	public Date getDeadline() throws RemoteException;
 
 	public String getContactDetails() throws RemoteException;
 

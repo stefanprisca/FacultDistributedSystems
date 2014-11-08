@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.internal.server.Constants;
+import ro.stefanprisca.distsystems.app3.server.models.JobCategory;
 
 @SuppressWarnings("unchecked")
 public class DBJobAccess {
@@ -32,5 +33,17 @@ public class DBJobAccess {
 
 		jobs.addAll(q.getResultList());
 		return jobs;
+	}
+
+	public List<JobCategory> getJobCategories() {
+		Query q = em.createQuery("SELECT jc FROM JobCategory jc");
+		return q.getResultList();
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		em.getTransaction().rollback();
+		em.close();
+		super.finalize();
 	}
 }

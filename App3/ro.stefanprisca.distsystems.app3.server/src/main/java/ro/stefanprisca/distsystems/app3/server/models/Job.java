@@ -1,6 +1,7 @@
 package ro.stefanprisca.distsystems.app3.server.models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import ro.stefanprisca.distsystems.app3.common.IJob;
 
@@ -20,17 +23,18 @@ public class Job implements IJob {
 
 	private String title;
 	private String compName;
-	private String deadline;
+	@Temporal(TemporalType.DATE)
+	private Date deadline;
 	private String contactDetails;
 	private String jobSpecification;
 	private Boolean taken;
 	private List<JobCategory> categories = new ArrayList<JobCategory>();
 
-	public String getDeadline() {
+	public Date getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(String deadline) {
+	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
 	}
 
