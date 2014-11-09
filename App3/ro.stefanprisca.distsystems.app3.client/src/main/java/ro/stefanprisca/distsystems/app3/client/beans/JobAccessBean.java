@@ -70,6 +70,18 @@ public class JobAccessBean {
 		return jobs;
 	}
 
+	public String takeJob(Long jobId) {
+		try {
+			jobAccessProvider.takeJobAction(jobId);
+		} catch (RemoteException e) {
+			return Messages.JOBPROVIDER_METHOD_CALL_ERROR;
+		}
+
+		setJobs();
+
+		return null;
+	}
+
 	public String filterJobs() {
 		System.out.println("Displaying selected categories: ");
 		try {

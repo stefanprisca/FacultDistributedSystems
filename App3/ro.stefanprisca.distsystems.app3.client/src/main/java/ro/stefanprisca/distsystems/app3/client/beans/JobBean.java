@@ -53,4 +53,8 @@ public class JobBean implements IJob {
 		this.job = job;
 	}
 
+	public Long getId() throws RemoteException {
+		return this.job.getId();
+	}
+
 }

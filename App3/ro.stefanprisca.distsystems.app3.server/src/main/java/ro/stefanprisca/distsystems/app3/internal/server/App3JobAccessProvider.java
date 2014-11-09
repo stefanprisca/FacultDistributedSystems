@@ -10,6 +10,7 @@ import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.common.IJobAccessProvider;
 import ro.stefanprisca.distsystems.app3.common.Messages;
 import ro.stefanprisca.distsystems.app3.server.dataaccess.DBJobAccess;
+import ro.stefanprisca.distsystems.app3.server.models.Job;
 import ro.stefanprisca.distsystems.app3.server.models.JobCategory;
 
 public class App3JobAccessProvider extends UnicastRemoteObject implements
@@ -61,5 +62,12 @@ public class App3JobAccessProvider extends UnicastRemoteObject implements
 			jobCategories.add(jc.getName());
 		}
 		return jobCategories;
+	}
+
+	public void takeJobAction(Long jobId) throws RemoteException {
+		Job job = dbJobAccess.getJobById(jobId);
+		dbJobAccess.startUpdate();
+		job.setTaken(true);
+		dbJobAccess.endUpdate();
 	}
 }

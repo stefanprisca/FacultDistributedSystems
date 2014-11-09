@@ -15,4 +15,6 @@ public interface IJobAccessProvider extends Remote {
 			Date endDate) throws RemoteException;
 
 	public List<String> getJobCategories() throws RemoteException;
+
+	public void takeJobAction(Long jobId) throws RemoteException;
 }

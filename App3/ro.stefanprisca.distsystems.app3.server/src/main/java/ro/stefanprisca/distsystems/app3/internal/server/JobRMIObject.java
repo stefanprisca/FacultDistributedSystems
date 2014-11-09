@@ -9,6 +9,8 @@ import ro.stefanprisca.distsystems.app3.common.IJob;
 public class JobRMIObject extends UnicastRemoteObject implements IJob {
 
 	private static final long serialVersionUID = -5427085641948815986L;
+
+	private Long id;
 	private String title;
 	private String compName;
 	private Date deadline;
@@ -21,6 +23,7 @@ public class JobRMIObject extends UnicastRemoteObject implements IJob {
 	};
 
 	public JobRMIObject(IJob job) throws RemoteException {
+		this.id = job.getId();
 		this.title = job.getTitle();
 		this.compName = job.getCompName();
 		this.deadline = job.getDeadline();
@@ -58,11 +61,15 @@ public class JobRMIObject extends UnicastRemoteObject implements IJob {
 		return categories;
 	}
 
-	public Long getId() {
-		return serialVersionUID;
-	}
-
 	public String getDisplayCategories() {
 		return categories;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long jobId) {
+		this.id = jobId;
 	}
 }

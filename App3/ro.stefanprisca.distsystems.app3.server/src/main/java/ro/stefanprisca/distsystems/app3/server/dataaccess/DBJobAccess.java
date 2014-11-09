@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.internal.server.Constants;
+import ro.stefanprisca.distsystems.app3.server.models.Job;
 import ro.stefanprisca.distsystems.app3.server.models.JobCategory;
 
 @SuppressWarnings("unchecked")
@@ -40,10 +41,25 @@ public class DBJobAccess {
 		return q.getResultList();
 	}
 
+	public Job getJobById(Long jobId) {
+		Query q = em.createQuery("SELECT j FROM Job j WHERE j.id=:jobId");
+		q.setParameter("jobId", jobId);
+		return (Job) q.getSingleResult();
+	}
+
+	public void startUpdate() {
+		em.getTransaction().begin();
+	}
+
+	public void endUpdate() {
+		em.getTransaction().commit();
+	}
+
 	@Override
 	protected void finalize() throws Throwable {
 		em.getTransaction().rollback();
 		em.close();
 		super.finalize();
 	}
+
 }

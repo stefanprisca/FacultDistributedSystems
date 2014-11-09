@@ -5,6 +5,8 @@ import java.rmi.RemoteException;
 import java.util.Date;
 
 public interface IJob extends Remote {
+	public Long getId() throws RemoteException;
+
 	public Date getDeadline() throws RemoteException;
 
 	public String getContactDetails() throws RemoteException;
