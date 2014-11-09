@@ -1,10 +1,8 @@
-package ro.stefanprisca.distsystems.app3.internal.server;
+package ro.stefanprisca.distsystems.app3.common;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
-
-import ro.stefanprisca.distsystems.app3.common.IJob;
 
 public class JobRMIObject extends UnicastRemoteObject implements IJob {
 

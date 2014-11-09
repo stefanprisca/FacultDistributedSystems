@@ -62,4 +62,8 @@ public class DBJobAccess {
 		super.finalize();
 	}
 
+	public void addJob(Job job) {
+		em.persist(job);
+	}
+
 }

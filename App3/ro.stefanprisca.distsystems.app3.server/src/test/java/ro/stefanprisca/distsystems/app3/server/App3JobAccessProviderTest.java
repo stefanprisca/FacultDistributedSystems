@@ -16,8 +16,10 @@ import org.junit.runners.JUnit4;
 import ro.stefanprisca.distsystems.app3.common.Constants;
 import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.common.IJobAccessProvider;
+import ro.stefanprisca.distsystems.app3.common.JobRMIObject;
 import ro.stefanprisca.distsystems.app3.common.Messages;
 import ro.stefanprisca.distsystems.app3.server.dataaccess.DBJobAccess;
+import ro.stefanprisca.distsystems.app3.server.models.Job;
 
 @RunWith(JUnit4.class)
 public class App3JobAccessProviderTest {
@@ -73,5 +75,15 @@ public class App3JobAccessProviderTest {
 					+ " deadline: " + job.getDeadline());
 		}
 
+	}
+
+	// @Test
+	public void testAddJob() throws RemoteException {
+		Job j = new Job();
+		j.setTitle("New Test Job");
+		List<String> categories = new ArrayList<String>();
+		categories.add("IT");
+
+		jaProvider.addNewJob(new JobRMIObject(j), categories);
 	}
 }

@@ -7,16 +7,20 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import ro.stefanprisca.distsystems.app3.common.Constants;
 import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.common.IJobAccessProvider;
+import ro.stefanprisca.distsystems.app3.common.JobRMIObject;
 import ro.stefanprisca.distsystems.app3.common.Messages;
 
 @SessionScoped
 @ManagedBean(name = "jobAccess", eager = true)
 public class JobAccessBean {
+	@ManagedProperty(value = "#{navigationBean}")
+	private NavigationBean navigationBean;
 
 	private final IJobAccessProvider jobAccessProvider;
 	private List<JobBean> jobs;
@@ -24,6 +28,9 @@ public class JobAccessBean {
 	private List<String> jobCategories;
 	private Date filterStartDate;
 	private Date filterEndDate;
+
+	private List<String> newJCategories;
+	private JobBean newJob = new JobBean();
 
 	public JobAccessBean() {
 		IJobAccessProvider partProvider;
@@ -85,6 +92,25 @@ public class JobAccessBean {
 		return null;
 	}
 
+	public String postJob() {
+		try {
+			jobAccessProvider.addNewJob(new JobRMIObject(newJob),
+					newJCategories);
+		} catch (RemoteException e) {
+			return Messages.JOBPROVIDER_METHOD_CALL_ERROR;
+		}
+		setJobs();
+		return navigationBean.toRegularPage();
+	}
+
+	public NavigationBean getNavigationBean() {
+		return navigationBean;
+	}
+
+	public void setNavigationBean(NavigationBean navigationBean) {
+		this.navigationBean = navigationBean;
+	}
+
 	public String filterJobs() {
 		try {
 			List<IJob> jobs = jobAccessProvider.getJobs(selectedCategories,
@@ -136,6 +162,22 @@ public class JobAccessBean {
 
 	public void setFilterEndDate(Date filterEndDate) {
 		this.filterEndDate = filterEndDate;
+	}
+
+	public JobBean getNewJob() {
+		return newJob;
+	}
+
+	public void setNewJob(JobBean newJob) {
+		this.newJob = newJob;
+	}
+
+	public List<String> getNewJCategories() {
+		return newJCategories;
+	}
+
+	public void setNewJCategories(List<String> newJCategories) {
+		this.newJCategories = newJCategories;
 	}
 
 }

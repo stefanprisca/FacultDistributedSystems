@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"htth://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Post Job</title>
+</h:head>
+<h:body>
+	<h1>Post a job</h1>
+	<h:form>
+
+
+		<h:outputStylesheet library="css" name="style.css" />
+		<table>
+			<tr>
+				<td><h:outputLabel name="header">Job Title</h:outputLabel></td>
+				<td><h:inputText styleClass="inputField"
+						value="#{jobAccess.newJob.title}" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel name="header">Job Deadline (dd/MM/yyyy)</h:outputLabel></td>
+				<td><h:inputText styleClass="inputField"
+						value="#{jobAccess.newJob.deadline}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:inputText></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel name="header">Contact Details</h:outputLabel></td>
+				<td><h:inputText styleClass="inputField"
+						value="#{jobAccess.newJob.contactDetails}" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel name="header">Company</h:outputLabel></td>
+				<td><h:inputText styleClass="inputField"
+						value="#{jobAccess.newJob.compName}" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel name="header">Specification</h:outputLabel></td>
+				<td><h:inputText styleClass="inputField detailInputFiled"
+						value="#{jobAccess.newJob.jobSpecification}" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel name="header">Categories</h:outputLabel></td>
+				<td><h:selectManyCheckbox value="#{jobAccess.newJCategories}">
+						<f:selectItems value="#{jobAccess.jobCategories}" var="jc"
+							itemValue="#{jc}" itemLabel="#{jc}" />
+					</h:selectManyCheckbox></td>
+			</tr>
+		</table>
+		<h:commandButton value="Post Job" action="#{jobAccess.postJob}"></h:commandButton>
+	</h:form>
+
+</h:body>
+</html>

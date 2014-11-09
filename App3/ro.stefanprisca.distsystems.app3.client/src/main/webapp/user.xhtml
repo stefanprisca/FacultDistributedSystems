@@ -10,17 +10,18 @@
 </h:head>
 <h:body>
 	<h1>#{jobAccess.serverMsg} !</h1>
+
 	<h:form>
 
 		<h:outputStylesheet library="css" name="style.css" />
-
+		
 		<h:selectManyCheckbox value="#{jobAccess.selectedCategories}">
 			<f:selectItems value="#{jobAccess.jobCategories}" var="jc"
 				itemValue="#{jc}" itemLabel="#{jc}" />
 		</h:selectManyCheckbox>
 		<h:panelGroup>
-		<h:outputLabel value="Between dates ( dd/MM/yyyy ):"></h:outputLabel>
-			
+			<h:outputLabel value="Between dates ( dd/MM/yyyy ):"></h:outputLabel>
+
 			<h:inputText value="#{jobAccess.filterStartDate}">
 				<f:convertDateTime pattern="dd/MM/yyyy" />
 			</h:inputText>
@@ -28,7 +29,7 @@
 				<f:convertDateTime pattern="dd/MM/yyyy" />
 			</h:inputText>
 		</h:panelGroup>
-		<br/>
+		<br />
 		<h:commandButton id="filterButton" value="Filter"
 			action="#{jobAccess.filterJobs}" />
 		<h:commandButton id="resetFilterButton" value="Reset Filter"
@@ -76,7 +77,13 @@
 			</h:column>
 
 		</h:dataTable>
-
+		<h:commandButton value="Post Job"
+			action="#{navigationBean.toPostJobPage}"></h:commandButton>
+	<br></br>
+	<br></br>
+	<h:commandButton id="button" value="LogOut"
+			action="#{userManager.doLogout}" />
+		<br />
 	</h:form>
 
 </h:body>

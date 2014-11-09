@@ -18,4 +18,8 @@ public class NavigationBean {
 	public String toRegularPage() {
 		return "/user.xhtml?faces-redirect=true";
 	}
+
+	public String toPostJobPage() {
+		return "/postJob.xhtml?faces-redirect=true";
+	}
 }

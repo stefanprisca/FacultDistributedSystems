@@ -8,6 +8,7 @@ import java.util.List;
 
 import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.common.IJobAccessProvider;
+import ro.stefanprisca.distsystems.app3.common.JobRMIObject;
 import ro.stefanprisca.distsystems.app3.common.Messages;
 import ro.stefanprisca.distsystems.app3.server.dataaccess.DBJobAccess;
 import ro.stefanprisca.distsystems.app3.server.models.Job;
@@ -89,5 +90,41 @@ public class App3JobAccessProvider extends UnicastRemoteObject implements
 		dbJobAccess.startUpdate();
 		job.setTaken(true);
 		dbJobAccess.endUpdate();
+	}
+
+	@Override
+	public void addNewJob(IJob newJob, List<String> categories)
+			throws RemoteException {
+		Job job = new Job();
+		setupJob(job, newJob, categories);
+
+		dbJobAccess.startUpdate();
+		dbJobAccess.addJob(job);
+		dbJobAccess.endUpdate();
+	}
+
+	private void setupJob(Job job, IJob newJob, List<String> categories)
+			throws RemoteException {
+		job.setCompName(newJob.getCompName());
+		job.setContactDetails(newJob.getContactDetails());
+		job.setDeadline(newJob.getDeadline() == null ? new Date(System
+				.currentTimeMillis()) : newJob.getDeadline());
+		job.setJobSpecification(newJob.getJobSpecification());
+		job.setTitle(newJob.getTitle());
+		job.setTaken(false);
+
+		List<JobCategory> jobCats = new ArrayList<JobCategory>();
+		List<JobCategory> dbCats = dbJobAccess.getJobCategories();
+
+		for (String cat : categories) {
+
+			dbCats.forEach(jc -> {
+				if (jc.getName().equals(cat))
+					jobCats.add(jc);
+			});
+
+		}
+
+		job.setCategories(jobCats);
 	}
 }
