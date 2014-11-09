@@ -30,18 +30,38 @@ public class App3JobAccessProvider extends UnicastRemoteObject implements
 
 	public List<IJob> getJobs(List<String> jobCategories, Date startDate,
 			Date endDate) throws RemoteException {
-		final List<IJob> jobs = new ArrayList<IJob>();
 
-		List<IJob> dbJobs;
+		List<IJob> jobs = getJobs();
 
-		for (String jobCategory : jobCategories) {
-			dbJobs = dbJobAccess.getJobs(jobCategory);
-			for (IJob iJob : dbJobs) {
-				jobs.add(new JobRMIObject(iJob));
+		if (jobCategories != null && !jobCategories.isEmpty()) {
+			for (String jobCategory : jobCategories) {
+				jobs.removeIf(j -> !getNoExceptionCategoriesWrapper(j)
+						.contains(jobCategory));
 			}
 		}
-
+		if (startDate != null) {
+			jobs.removeIf(j -> getNoExceptionDateWrapper(j).before(startDate));
+		}
+		if (endDate != null) {
+			jobs.removeIf(j -> getNoExceptionDateWrapper(j).after(endDate));
+		}
 		return jobs;
+	}
+
+	private Date getNoExceptionDateWrapper(IJob j) {
+		try {
+			return j.getDeadline();
+		} catch (RemoteException e) {
+			return null;
+		}
+	}
+
+	private String getNoExceptionCategoriesWrapper(IJob j) {
+		try {
+			return j.getDisplayCategories();
+		} catch (RemoteException e) {
+			return "";
+		}
 	}
 
 	public List<IJob> getJobs() throws RemoteException {

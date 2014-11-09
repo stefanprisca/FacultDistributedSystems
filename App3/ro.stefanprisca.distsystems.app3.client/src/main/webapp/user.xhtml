@@ -13,13 +13,26 @@
 	<h:form>
 
 		<h:outputStylesheet library="css" name="style.css" />
-		
+
 		<h:selectManyCheckbox value="#{jobAccess.selectedCategories}">
 			<f:selectItems value="#{jobAccess.jobCategories}" var="jc"
 				itemValue="#{jc}" itemLabel="#{jc}" />
 		</h:selectManyCheckbox>
-		<h:commandButton id="filterButton" value="Filter" action="#{jobAccess.filterJobs}"/>
-		<h:commandButton id="resetFilterButton" value="Reset Filter" action="#{jobAccess.resetFilters}"/>
+		<h:panelGroup>
+		<h:outputLabel value="Between dates ( dd/MM/yyyy ):"></h:outputLabel>
+			
+			<h:inputText value="#{jobAccess.filterStartDate}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:inputText>
+			<h:inputText value="#{jobAccess.filterEndDate}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:inputText>
+		</h:panelGroup>
+		<br/>
+		<h:commandButton id="filterButton" value="Filter"
+			action="#{jobAccess.filterJobs}" />
+		<h:commandButton id="resetFilterButton" value="Reset Filter"
+			action="#{jobAccess.resetFilters}" />
 		<h:dataTable value="#{jobAccess.jobs}" var="job" styleClass="table"
 			headerClass="tableHeader" rowClasses="tableOddRow,tableEvenRow">
 			<h:column>
@@ -57,7 +70,8 @@
 
 			<h:column>
 				<f:facet name="header">Take Job!</f:facet>
-				<h:commandButton rendered="#{not job.taken}" value="Take" action="#{jobAccess.takeJob(job.id)}">
+				<h:commandButton rendered="#{not job.taken}" value="Take"
+					action="#{jobAccess.takeJob(job.id)}">
 				</h:commandButton>
 			</h:column>
 

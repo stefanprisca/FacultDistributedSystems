@@ -3,6 +3,7 @@ package ro.stefanprisca.distsystems.app3.client.beans;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -21,6 +22,8 @@ public class JobAccessBean {
 	private List<JobBean> jobs;
 	private List<String> selectedCategories;
 	private List<String> jobCategories;
+	private Date filterStartDate;
+	private Date filterEndDate;
 
 	public JobAccessBean() {
 		IJobAccessProvider partProvider;
@@ -83,10 +86,9 @@ public class JobAccessBean {
 	}
 
 	public String filterJobs() {
-		System.out.println("Displaying selected categories: ");
 		try {
 			List<IJob> jobs = jobAccessProvider.getJobs(selectedCategories,
-					null, null);
+					filterStartDate, filterEndDate);
 			setJobs(jobs);
 		} catch (RemoteException e) {
 			return Messages.JOBPROVIDER_METHOD_CALL_ERROR;
@@ -118,6 +120,22 @@ public class JobAccessBean {
 
 	public void setSelectedCategories(List<String> selectedCategories) {
 		this.selectedCategories = selectedCategories;
+	}
+
+	public Date getFilterStartDate() {
+		return filterStartDate;
+	}
+
+	public void setFilterStartDate(Date filterStartDate) {
+		this.filterStartDate = filterStartDate;
+	}
+
+	public Date getFilterEndDate() {
+		return filterEndDate;
+	}
+
+	public void setFilterEndDate(Date filterEndDate) {
+		this.filterEndDate = filterEndDate;
 	}
 
 }

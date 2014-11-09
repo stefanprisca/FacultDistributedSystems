@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -42,5 +44,34 @@ public class App3JobAccessProviderTest {
 		jaProvider.takeJobAction(id);
 
 		assertTrue(jobDbAccess.getJobById(id).getTaken());
+	}
+
+	@Test
+	public void testFilterJobs() throws RemoteException {
+		Date currentDate = new Date(System.currentTimeMillis());
+
+		List<String> categories = new ArrayList<String>();
+		String searchCat = "IT";
+		categories.add(searchCat);
+
+		List<IJob> jobs = jaProvider.getJobs(categories, currentDate, null);
+
+		// assertTrue(!jobs.isEmpty());
+		for (IJob job : jobs) {
+			System.out.println("Job filtered by start date: " + job.getTitle()
+					+ " deadline: " + job.getDeadline());
+			assertTrue(job.getDeadline().after(currentDate));
+			assertTrue(job.getDisplayCategories().contains(searchCat));
+
+		}
+
+		jobs = jaProvider.getJobs(null, null, currentDate);
+
+		for (IJob job : jobs) {
+			assertTrue(job.getDeadline().before(currentDate));
+			System.out.println("Job filtered by end date: " + job.getTitle()
+					+ " deadline: " + job.getDeadline());
+		}
+
 	}
 }
