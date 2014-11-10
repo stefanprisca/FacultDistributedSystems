@@ -6,10 +6,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-
+import ro.stefanprisca.distsystems.utils.login.App3LoginUtilsServiceFactory;
 import ro.stefanprisca.distsystems.utils.login.Constants;
 import ro.stefanprisca.distsystems.utils.login.ILoginUtils;
 import ro.stefanprisca.distsystems.utils.login.models.ApplicationUser;
@@ -28,12 +25,8 @@ public class ApplicationUserManager {
 	protected final ILoginUtils loginUtils;
 
 	public ApplicationUserManager() {
-		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-		factory.getInInterceptors().add(new LoggingInInterceptor());
-		factory.getOutInterceptors().add(new LoggingOutInterceptor());
-		factory.setServiceClass(ILoginUtils.class);
-		factory.setAddress(ro.stefanprisca.distsystems.utils.login.Constants.SERVICE_ADDRESS);
-		loginUtils = (ILoginUtils) factory.create();
+		loginUtils = App3LoginUtilsServiceFactory
+				.provideLoginUtilsServiceAccess();
 	}
 
 	public String doLogin() {
