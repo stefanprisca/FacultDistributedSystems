@@ -30,12 +30,17 @@ public class ApplicationUserManager {
 	}
 
 	public String doLogin() {
+
+		this.user = new ApplicationUser();
 		String response = loginUtils.doLogin(loginReqID, loginReqPW);
 		if (response.equals(Constants.LOGIN_ADMINISTRATOR)) {
+			this.user.setType(Constants.ADMINISTRATOR_TYPE);
 			return navigationBean.toAdminPage();
 		} else if (response.equals(Constants.LOGIN_REGULAR_USER)) {
+			this.user.setType(Constants.REGULAR_TYPE);
 			return navigationBean.toRegularPage();
 		}
+		this.user = null;
 		return navigationBean.toLogIn();
 	}
 
@@ -54,6 +59,11 @@ public class ApplicationUserManager {
 		this.user = null;
 
 		return navigationBean.toLogIn();
+	}
+
+	public boolean isAdminLogin() {
+		return this.user != null
+				&& this.user.getType().equals(Constants.ADMINISTRATOR_TYPE);
 	}
 
 	// --------------------------
