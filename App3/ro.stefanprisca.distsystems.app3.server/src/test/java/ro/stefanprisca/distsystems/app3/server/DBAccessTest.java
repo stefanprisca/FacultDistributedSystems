@@ -3,6 +3,7 @@ package ro.stefanprisca.distsystems.app3.server;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class DBAccessTest {
 		// initDatabase();
 	}
 
-	private static void initDatabase() {
+	private static void initDatabase() throws RemoteException {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
 
@@ -98,7 +99,7 @@ public class DBAccessTest {
 	}
 
 	@Test
-	public void testDBInsertJob() {
+	public void testDBInsertJob() throws RemoteException {
 
 		List<JobCategory> cats = em
 				.createQuery("select jc from JobCategory jc").getResultList();
@@ -131,7 +132,7 @@ public class DBAccessTest {
 	}
 
 	private static Job generateTestJob(String title, Date deadline,
-			List<JobCategory> categories) {
+			List<JobCategory> categories) throws RemoteException {
 		Job newJ = null;
 		newJ = new Job();
 		newJ.setCompName("Test Com");

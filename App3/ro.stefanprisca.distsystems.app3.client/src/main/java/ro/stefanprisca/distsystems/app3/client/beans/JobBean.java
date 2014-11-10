@@ -1,16 +1,16 @@
 package ro.stefanprisca.distsystems.app3.client.beans;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 import ro.stefanprisca.distsystems.app3.common.IJob;
 
-@SessionScoped
 @ManagedBean(name = "jobBean", eager = true)
-public class JobBean implements IJob {
+public class JobBean extends UnicastRemoteObject implements IJob {
+	private static final long serialVersionUID = -8610000541722396472L;
 
 	private Long id;
 	private String title;
@@ -21,10 +21,10 @@ public class JobBean implements IJob {
 	private Boolean taken;
 	private String categories;
 
-	public JobBean() {
+	public JobBean() throws RemoteException {
 	};
 
-	public JobBean(IJob job) {
+	public JobBean(IJob job) throws RemoteException {
 		try {
 			this.id = job.getId();
 			this.title = job.getTitle();

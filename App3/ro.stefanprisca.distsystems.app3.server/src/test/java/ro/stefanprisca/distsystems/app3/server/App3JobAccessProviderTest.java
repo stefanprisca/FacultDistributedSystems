@@ -16,7 +16,6 @@ import org.junit.runners.JUnit4;
 import ro.stefanprisca.distsystems.app3.common.Constants;
 import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.common.IJobAccessProvider;
-import ro.stefanprisca.distsystems.app3.common.JobRMIObject;
 import ro.stefanprisca.distsystems.app3.common.Messages;
 import ro.stefanprisca.distsystems.app3.server.dataaccess.DBJobAccess;
 import ro.stefanprisca.distsystems.app3.server.models.Job;
@@ -84,6 +83,6 @@ public class App3JobAccessProviderTest {
 		List<String> categories = new ArrayList<String>();
 		categories.add("IT");
 
-		jaProvider.addNewJob(new JobRMIObject(j), categories);
+		jaProvider.addNewJob(j, categories);
 	}
 }

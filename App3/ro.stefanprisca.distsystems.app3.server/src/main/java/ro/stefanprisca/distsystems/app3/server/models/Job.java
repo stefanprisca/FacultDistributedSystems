@@ -1,5 +1,7 @@
 package ro.stefanprisca.distsystems.app3.server.models;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,11 +13,20 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import ro.stefanprisca.distsystems.app3.common.IJob;
 
 @Entity
-public class Job implements IJob {
+public class Job extends UnicastRemoteObject implements IJob {
+
+	@Transient
+	private static final long serialVersionUID = 2839525632200833162L;
+
+	public Job() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

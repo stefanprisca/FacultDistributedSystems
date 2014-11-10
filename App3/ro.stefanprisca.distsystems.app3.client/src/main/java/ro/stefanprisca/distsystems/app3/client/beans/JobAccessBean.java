@@ -13,7 +13,6 @@ import javax.faces.bean.SessionScoped;
 import ro.stefanprisca.distsystems.app3.common.Constants;
 import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.common.IJobAccessProvider;
-import ro.stefanprisca.distsystems.app3.common.JobRMIObject;
 import ro.stefanprisca.distsystems.app3.common.Messages;
 
 @SessionScoped
@@ -30,13 +29,14 @@ public class JobAccessBean {
 	private Date filterEndDate;
 
 	private List<String> newJCategories;
-	private JobBean newJob = new JobBean();
+	private JobBean newJob;
 
 	public JobAccessBean() {
 		IJobAccessProvider partProvider;
 		try {
 			partProvider = (IJobAccessProvider) Naming
 					.lookup(Constants.JOB_ACCESS_PROVIDER_REGPOINT);
+			newJob = new JobBean();
 		} catch (Exception e) {
 			partProvider = null;
 			System.err.println(Messages.JOBPROVIDER_RETRIEVAL_ERROR);
@@ -71,8 +71,12 @@ public class JobAccessBean {
 	public void setJobs(List<IJob> externalJobs) {
 		this.jobs = new ArrayList<JobBean>();
 		for (IJob job : externalJobs) {
-			JobBean jb = new JobBean(job);
-			this.jobs.add(jb);
+			JobBean jb;
+			try {
+				jb = new JobBean(job);
+				this.jobs.add(jb);
+			} catch (RemoteException e) {
+			}
 		}
 	}
 
@@ -94,8 +98,7 @@ public class JobAccessBean {
 
 	public String postJob() {
 		try {
-			jobAccessProvider.addNewJob(new JobRMIObject(newJob),
-					newJCategories);
+			jobAccessProvider.addNewJob(newJob, newJCategories);
 		} catch (RemoteException e) {
 			return Messages.JOBPROVIDER_METHOD_CALL_ERROR;
 		}

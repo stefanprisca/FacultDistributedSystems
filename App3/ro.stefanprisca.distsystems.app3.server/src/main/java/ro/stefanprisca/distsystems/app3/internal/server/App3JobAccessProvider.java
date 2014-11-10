@@ -8,7 +8,6 @@ import java.util.List;
 
 import ro.stefanprisca.distsystems.app3.common.IJob;
 import ro.stefanprisca.distsystems.app3.common.IJobAccessProvider;
-import ro.stefanprisca.distsystems.app3.common.JobRMIObject;
 import ro.stefanprisca.distsystems.app3.common.Messages;
 import ro.stefanprisca.distsystems.app3.server.dataaccess.DBJobAccess;
 import ro.stefanprisca.distsystems.app3.server.models.Job;
@@ -66,14 +65,7 @@ public class App3JobAccessProvider extends UnicastRemoteObject implements
 	}
 
 	public List<IJob> getJobs() throws RemoteException {
-		final List<IJob> jobs = new ArrayList<IJob>();
-
-		List<IJob> dbJobs;
-
-		dbJobs = dbJobAccess.getJobs();
-		for (IJob iJob : dbJobs) {
-			jobs.add(new JobRMIObject(iJob));
-		}
+		final List<IJob> jobs = dbJobAccess.getJobs();
 		return jobs;
 	}
 
