@@ -14,10 +14,10 @@
 			<property name="eclipselink.jdbc.password" value="ds_2014" />
 			<property name="eclipselink.jdbc.user" value="ds_2014" />
 
-			<!-- EclipseLink should create the database schema automatically -->
+			<!-- EclipseLink should create the database schema automatically 
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
 			<property name="eclipselink.ddl-generation.output-mode"
-				value="database" />
+				value="database" />-->
 		</properties>
 	</persistence-unit>
 </persistence> 	

@@ -2,7 +2,7 @@ package ro.stefanprisca.distsystems.utils.login;
 
 public class Constants {
 
-	public static final String SERVICE_ADDRESS = "http://localhost:8080/ro.stefanprisca.distsystems.utils.login/services/DefaultLoginUtilsPort";
+	public static final String SERVICE_ADDRESS = "http://localhost:8080/loginUtilsService/services/DefaultLoginUtilsPort";
 	public static final String ADMINISTRATOR_TYPE = "user.administrator";
 	public static final String REGULAR_TYPE = "user.regular";
 	public static final String PERSISTENCE_UNIT_NAME = "applicationUsers";
