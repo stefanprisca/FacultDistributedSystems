@@ -2,7 +2,7 @@ package ro.stefanprisca.distsystems.app4.ejb.beans;
 
 import javax.ejb.Stateless;
 
-import ro.stefanprisca.distsystems.app4.ejb.common.Constants;
+import ro.stefanprisca.distsystems.app4.ejb.common.Messages;
 
 /**
  * Session Bean implementation class BookProviderBean
@@ -11,13 +11,11 @@ import ro.stefanprisca.distsystems.app4.ejb.common.Constants;
 public class BookProviderBean implements BookProviderRemote {
 
 	public BookProviderBean() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String getServerConfirmation() {
-		// TODO Auto-generated method stub
-		return Constants.EJB_CONNECTION_TEST;
+		return Messages.EJB_CONNECTION_TEST;
 	}
 
 }

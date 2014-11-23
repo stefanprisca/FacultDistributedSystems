@@ -6,7 +6,6 @@
 	<groupId>ro.stefanprisca.distsystems</groupId>
 	<artifactId>ro.stefanprisca.distsystems.app4.ejb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>App4 EJB Business Logic</name>
 
 	<properties>
 		<!-- Explicitly declaring the source encoding eliminates the following 

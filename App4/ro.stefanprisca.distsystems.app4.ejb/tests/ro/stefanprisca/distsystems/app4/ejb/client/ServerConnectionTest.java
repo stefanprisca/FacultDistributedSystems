@@ -9,6 +9,7 @@ import org.junit.runners.JUnit4;
 import ro.stefanprisca.distsystems.app4.ejb.beans.BookProviderRemote;
 import ro.stefanprisca.distsystems.app4.ejb.client.utils.ClientUtility;
 import ro.stefanprisca.distsystems.app4.ejb.common.Constants;
+import ro.stefanprisca.distsystems.app4.ejb.common.Messages;
 import ro.stefanprisca.distsystems.utils.login.LoginUtilsServiceFactory;
 
 @RunWith(JUnit4.class)
@@ -18,13 +19,13 @@ public class ServerConnectionTest {
 	public void testEjbConnection() {
 		BookProviderRemote provider = ClientUtility.doLookup();
 		assertTrue(provider.getServerConfirmation().equals(
-				Constants.EJB_CONNECTION_TEST));
+				Messages.EJB_CONNECTION_TEST));
 	}
 
 	@Test
 	public void testTomcatWebServiceConnection() {
-		String conf = LoginUtilsServiceFactory.provideLoginUtilsServiceAccess()
-				.getConfString();
+		String conf = LoginUtilsServiceFactory.provideLoginUtilsServiceAccess(
+				Constants.DB_CONNECTION_DBNAME).getConfString();
 
 		assertTrue(conf
 				.equals(ro.stefanprisca.distsystems.utils.login.Constants.CONNECTION_CONF_STRING));

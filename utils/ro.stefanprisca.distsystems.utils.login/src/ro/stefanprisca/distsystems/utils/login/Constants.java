@@ -13,4 +13,6 @@ public class Constants {
 	public static final String LOGIN_ADMINISTRATOR = "loginAdministrator";
 	public static final String LOGIN_REGULAR_USER = "loginRegularUser";
 
+	public static final String PERSISTT_JDBC_URL_CONNECTION = "eclipselink.jdbc.url";
+
 }

@@ -1,6 +1,8 @@
 package ro.stefanprisca.distsystems.utils.login;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jws.WebMethod;
 import javax.jws.WebResult;
@@ -19,8 +21,11 @@ public class DefaultLoginUtils implements ILoginUtils {
 	protected List<ApplicationUser> users;
 
 	public DefaultLoginUtils() {
-		factory = Persistence
-				.createEntityManagerFactory(Constants.PERSISTENCE_UNIT_NAME);
+		Map<String, String> properties = new HashMap<String, String>();
+		properties.put(Constants.PERSISTT_JDBC_URL_CONNECTION,
+				LoginUtilsServiceFactory.getDbConnectionString());
+		factory = Persistence.createEntityManagerFactory(
+				Constants.PERSISTENCE_UNIT_NAME, properties);
 		EntityManager em = factory.createEntityManager();
 		// read the existing entries and write to console
 		Query q = em.createQuery("select t from ApplicationUser t");
