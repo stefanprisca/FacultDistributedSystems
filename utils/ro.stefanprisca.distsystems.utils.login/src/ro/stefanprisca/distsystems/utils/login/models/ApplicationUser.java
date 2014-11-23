@@ -6,10 +6,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
+@SuppressWarnings("restriction")
 @ManagedBean
 @Entity
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "applicationUser", propOrder = { "id", "name", "homeAddress",
+		"longitude", "latitude", "birthDate", "loginID", "loginPW", "type",
+		"canEdit" })
 public class ApplicationUser {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

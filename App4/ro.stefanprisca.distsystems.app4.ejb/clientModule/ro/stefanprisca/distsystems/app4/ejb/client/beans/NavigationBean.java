@@ -3,18 +3,15 @@ package ro.stefanprisca.distsystems.app4.ejb.client.beans;
 public class NavigationBean {
 
 	public String toAdminPage() {
-		// TODO Auto-generated method stub
-		return null;
+		return "admin.xhtml?faces-redirect=true";
 	}
 
 	public String toRegularPage() {
-		// TODO Auto-generated method stub
-		return null;
+		return "/user.xhtml?faces-redirect=true";
 	}
 
 	public String toLogIn() {
-		// TODO Auto-generated method stub
-		return null;
+		return "/home.xhtml?faces-redirect=true";
 	}
 
 }

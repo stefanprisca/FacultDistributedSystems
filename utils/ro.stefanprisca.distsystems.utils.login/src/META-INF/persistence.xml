@@ -5,19 +5,19 @@
 	<persistence-unit name="applicationUsers" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>ro.stefanprisca.distsystems.utils.login.models.ApplicationUser</class>
-		<properties>
+		<!--<properties>
 			<property name="eclipselink.logging.level" value="FINE" />
 			<property name="eclipselink.jdbc.driver"
 				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-			<property name="eclipselink.jdbc.url"
-				value="jdbc:sqlserver://localhost:9895;databaseName=ds_assign1" />
+			 <property name="eclipselink.jdbc.url"
+				value="jdbc:sqlserver://localhost:9895;databaseName=ds_assign1" /> 
 			<property name="eclipselink.jdbc.password" value="ds_2014" />
 			<property name="eclipselink.jdbc.user" value="ds_2014" />
 
-			<!-- EclipseLink should create the database schema automatically -->
-			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+			EclipseLink should create the database schema automatically
+			<property name="eclipselink.ddl-generation" value="create-tables" />
 			<property name="eclipselink.ddl-generation.output-mode"
-				value="database" />
-		</properties>
+				value="database" /> 
+		</properties>-->
 	</persistence-unit>
 </persistence> 	

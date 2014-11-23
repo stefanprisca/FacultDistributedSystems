@@ -6,5 +6,6 @@ public class Constants {
 	public static final String EJB_DISTINCT_NAME = "";
 
 	public static final String DB_CONNECTION_DBNAME = "ds_assign4";
+	public static final String DB_PERSIST_UNIT_NAME = "books";
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="DefaultLoginUtilsService" targetNamespace="http://login.utils.distsystems.stefanprisca.ro/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://login.utils.distsystems.stefanprisca.ro/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+<wsdl:definitions name="DefaultLoginUtilsService" targetNamespace="http://login.utils.distsystems.stefanprisca.ro/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://login.utils.distsystems.stefanprisca.ro/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:types>
-    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
   <import namespace="http://login.utils.distsystems.stefanprisca.ro/" schemaLocation="defaultloginutils_schema1.xsd"/>
 </schema>
   </wsdl:types>
@@ -150,7 +150,7 @@
   </wsdl:binding>
   <wsdl:service name="DefaultLoginUtilsService">
     <wsdl:port name="DefaultLoginUtilsPort" binding="tns:DefaultLoginUtilsServiceSoapBinding">
-      <soap:address location="http://localhost:8080/ro.stefanprisca.distsystems.utils.login/services"/>
+      <soap:address location="http://localhost:9090/DefaultLoginUtilsPort"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

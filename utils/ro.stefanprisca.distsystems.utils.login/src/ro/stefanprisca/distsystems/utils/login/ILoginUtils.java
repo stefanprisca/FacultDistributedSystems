@@ -30,8 +30,10 @@ public interface ILoginUtils {
 			@WebParam(name = "arg1") String loginReqPW);
 
 	@WebMethod(operationName = "addUser", action = "urn:AddUser")
-	public abstract void addUser(@WebParam(name = "arg0") ApplicationUser newUser);
+	public abstract void addUser(
+			@WebParam(name = "arg0") ApplicationUser newUser);
 
 	@WebMethod(operationName = "deleteUser", action = "urn:DeleteUser")
-	public abstract void deleteUser(@WebParam(name = "arg0") ApplicationUser user);
+	public abstract void deleteUser(
+			@WebParam(name = "arg0") ApplicationUser user);
 }

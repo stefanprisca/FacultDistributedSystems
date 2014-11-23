@@ -119,6 +119,7 @@
 			<groupId>ro.stefanprisca.distsystems</groupId>
 			<artifactId>ro.stefanprisca.distsystems.utils.login</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+			<classifier>classes</classifier>
 		</dependency>
 
 

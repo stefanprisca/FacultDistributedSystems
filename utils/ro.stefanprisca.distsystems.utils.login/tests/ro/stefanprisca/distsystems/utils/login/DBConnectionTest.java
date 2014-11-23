@@ -2,12 +2,16 @@ package ro.stefanprisca.distsystems.utils.login;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -20,9 +24,18 @@ public class DBConnectionTest {
 	private static final String PERSISTENCE_UNIT_NAME = "applicationUsers";
 	private static EntityManagerFactory factory;
 
+	@BeforeClass
+	public static void setUpClass() {
+		LoginUtilsServiceFactory.setDbName("ds_assign4");
+		Map<String, String> properties = new HashMap<String, String>();
+		properties.put(Constants.PERSISTT_JDBC_URL_CONNECTION,
+				LoginUtilsServiceFactory.getDbConnectionString());
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME,
+				properties);
+	}
+
 	@Before
 	public void setUp() throws Exception {
-		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
 
 		// Begin a new local transaction so that we can persist a new entity

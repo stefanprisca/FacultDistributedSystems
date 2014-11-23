@@ -1,12 +1,12 @@
 package ro.stefanprisca.distsystems.utils.login;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.jws.WebMethod;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,18 +14,20 @@ import javax.persistence.Query;
 
 import ro.stefanprisca.distsystems.utils.login.models.ApplicationUser;
 
+@SuppressWarnings("restriction")
 @WebService(targetNamespace = "http://login.utils.distsystems.stefanprisca.ro/", portName = "DefaultLoginUtilsPort", serviceName = "DefaultLoginUtilsService", endpointInterface = "ro.stefanprisca.distsystems.utils.login.ILoginUtils")
+@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 public class DefaultLoginUtils implements ILoginUtils {
 
 	private final EntityManagerFactory factory;
 	protected List<ApplicationUser> users;
 
 	public DefaultLoginUtils() {
-		Map<String, String> properties = new HashMap<String, String>();
-		properties.put(Constants.PERSISTT_JDBC_URL_CONNECTION,
-				LoginUtilsServiceFactory.getDbConnectionString());
+		Map<String, Object> properties = LoginUtilsServiceFactory
+				.provideDefaultConnectionProperties();
 		factory = Persistence.createEntityManagerFactory(
 				Constants.PERSISTENCE_UNIT_NAME, properties);
+
 		EntityManager em = factory.createEntityManager();
 		// read the existing entries and write to console
 		Query q = em.createQuery("select t from ApplicationUser t");
@@ -36,15 +38,17 @@ public class DefaultLoginUtils implements ILoginUtils {
 	@WebMethod(operationName = "getConfString", action = "urn:GetConfString")
 	@WebResult(name = "return")
 	public String getConfString() {
+		System.out.println(Constants.CONNECTION_CONF_STRING);
 		return Constants.CONNECTION_CONF_STRING;
 	}
 
+	@WebMethod(operationName = "getUsers", action = "urn:GetUsers")
+	@WebResult(name = "return")
 	public List<ApplicationUser> getUsers() {
 		if (users == null) {
 			EntityManager em = factory.createEntityManager();
-			// read the existing entries and write to console
 			Query q = em.createQuery("select t from ApplicationUser t");
-			users = q.getResultList();
+			this.users = q.getResultList();
 			em.close();
 		}
 
@@ -52,6 +56,7 @@ public class DefaultLoginUtils implements ILoginUtils {
 
 	}
 
+	@WebMethod(operationName = "saveUsers", action = "urn:SaveUsers")
 	public void saveUsers(List<ApplicationUser> users) {
 		EntityManager em = factory.createEntityManager();
 
@@ -80,6 +85,7 @@ public class DefaultLoginUtils implements ILoginUtils {
 		em.close();
 	}
 
+	@WebMethod(operationName = "addUser", action = "urn:AddUser")
 	public void addUser(ApplicationUser newUser) {
 
 		users.add(newUser);
@@ -93,6 +99,7 @@ public class DefaultLoginUtils implements ILoginUtils {
 		em.close();
 	}
 
+	@WebMethod(operationName = "deleteUser", action = "urn:DeleteUser")
 	public void deleteUser(ApplicationUser user) {
 		this.users.remove(user);
 		EntityManager em = factory.createEntityManager();
@@ -113,6 +120,8 @@ public class DefaultLoginUtils implements ILoginUtils {
 		return user != null && user.getType().equals(Constants.REGULAR_TYPE);
 	}
 
+	@WebMethod(operationName = "doLogin", action = "urn:DoLogin")
+	@WebResult(name = "return")
 	public String doLogin(String loginReqID, String loginReqPW) {
 		EntityManager em = factory.createEntityManager();
 		Query q = em.createQuery("select u from ApplicationUser u "
@@ -137,4 +146,5 @@ public class DefaultLoginUtils implements ILoginUtils {
 		return Constants.LOGIN_ERROR;
 
 	}
+
 }

@@ -25,7 +25,9 @@ public class ApplicationUserManagerBean {
 	protected final ILoginUtils loginUtils;
 
 	public ApplicationUserManagerBean() {
-		loginUtils = LoginUtilsServiceFactory.provideLoginUtilsServiceAccess();
+		String connName = ro.stefanprisca.distsystems.app4.ejb.common.Constants.DB_CONNECTION_DBNAME;
+		loginUtils = LoginUtilsServiceFactory
+				.provideLoginUtilsServiceAccess(connName);
 	}
 
 	public String doLogin() {
