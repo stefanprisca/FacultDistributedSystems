@@ -17,7 +17,9 @@
            <h:outputText value="password:"/>
            <h:inputSecret value="#{userManager.loginReqPW}" id="password"/>
            <br/>
-           <h:commandButton id="button" value="Login" action="#{userManager.doLogin}"/>
+           <h:commandButton id="button_login" value="Login" action="#{userManager.doLogin}"/>
+           <br/>
+           <h:commandButton id="button_register" value="Register" action="#{navigationBean.toRegPage}"/>
            <br/>
            <h:messages />
            <br/>

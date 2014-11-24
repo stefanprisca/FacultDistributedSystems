@@ -23,7 +23,7 @@ public class ServerConnectionTest {
 	}
 
 	@Test
-	public void testTomcatWebServiceConnection() {
+	public void testLoginWebServiceConnection() {
 		String conf = LoginUtilsServiceFactory.provideLoginUtilsServiceAccess(
 				Constants.DB_CONNECTION_DBNAME).getConfString();
 

@@ -1,13 +1,21 @@
 package ro.stefanprisca.distsystems.app4.ejb.models;
 
+import java.io.Serializable;
+
+import javax.annotation.ManagedBean;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
-public class Book {
+@ManagedBean
+public class Book implements Serializable {
+	@Transient
+	private static final long serialVersionUID = 2426654026445485540L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

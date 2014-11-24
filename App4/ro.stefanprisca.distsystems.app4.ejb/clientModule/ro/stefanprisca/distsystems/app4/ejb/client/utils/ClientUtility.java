@@ -16,6 +16,10 @@ public class ClientUtility {
 
 	private static final String PKG_INTERFACES = "org.jboss.ejb.client.naming";
 
+	public static void main(String[] argv) {
+		doLookup();
+	}
+
 	public static BookProviderRemote doLookup() {
 		Context context = null;
 		BookProviderRemote bean = null;

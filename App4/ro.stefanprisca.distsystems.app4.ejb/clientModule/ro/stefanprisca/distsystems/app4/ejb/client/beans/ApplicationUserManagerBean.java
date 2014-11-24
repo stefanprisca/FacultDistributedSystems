@@ -15,6 +15,7 @@ import ro.stefanprisca.distsystems.utils.login.models.ApplicationUser;
 @ManagedBean(name = "userManager", eager = true)
 public class ApplicationUserManagerBean {
 	private ApplicationUser user;
+	private boolean newAdmin = false;
 
 	private String loginReqID;
 	private String loginReqPW;
@@ -28,6 +29,23 @@ public class ApplicationUserManagerBean {
 		String connName = ro.stefanprisca.distsystems.app4.ejb.common.Constants.DB_CONNECTION_DBNAME;
 		loginUtils = LoginUtilsServiceFactory
 				.provideLoginUtilsServiceAccess(connName);
+	}
+
+	public String addUser() {
+		if (this.user != null) {
+			if (this.newAdmin) {
+				user.setType(Constants.ADMINISTRATOR_TYPE);
+			} else {
+				user.setType(Constants.REGULAR_TYPE);
+			}
+			loginUtils.addUser(this.user);
+			this.loginReqID = this.user.getLoginID();
+			this.loginReqPW = this.user.getLoginPW();
+
+			return doLogin();
+		} else {
+			return null;
+		}
 	}
 
 	public String doLogin() {
@@ -70,7 +88,14 @@ public class ApplicationUserManagerBean {
 	// --------------------------
 
 	public ApplicationUser getUser() {
+		if (this.user == null) {
+			this.user = new ApplicationUser();
+		}
 		return this.user;
+	}
+
+	public void setUser(ApplicationUser user) {
+		this.user = user;
 	}
 
 	public String getLoginReqID() {
@@ -91,6 +116,14 @@ public class ApplicationUserManagerBean {
 
 	public void setNavigationBean(NavigationBean navigationBean) {
 		this.navigationBean = navigationBean;
+	}
+
+	public boolean isNewAdmin() {
+		return newAdmin;
+	}
+
+	public void setNewAdmin(boolean newAdmin) {
+		this.newAdmin = newAdmin;
 	}
 
 }

@@ -9,6 +9,7 @@ import org.junit.runners.JUnit4;
 
 import ro.stefanprisca.distsystems.app4.ejb.client.beans.ApplicationUserManagerBean;
 import ro.stefanprisca.distsystems.app4.ejb.client.beans.NavigationBean;
+import ro.stefanprisca.distsystems.utils.login.models.ApplicationUser;
 
 @RunWith(JUnit4.class)
 public class LoginWebServiceTest {
@@ -34,6 +35,15 @@ public class LoginWebServiceTest {
 		usermanager.setLoginReqID("user");
 		usermanager.setLoginReqPW("user");
 		assertTrue(usermanager.doLogin().equals(navbean.toRegularPage()));
+	}
+
+	@Test
+	public void testRegisterAction() {
+		ApplicationUser u = usermanager.getUser();
+		u.setLoginID("NewTestUserAdmin");
+		u.setLoginPW("NewTestUserAdmin");
+		usermanager.setNewAdmin(true);
+		assertTrue(usermanager.addUser().equals(navbean.toAdminPage()));
 	}
 
 	// @Test
