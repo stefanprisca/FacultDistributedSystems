@@ -1,5 +1,6 @@
 package ro.stefanprisca.distsystems.app4.ejb.client.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -12,11 +13,19 @@ import ro.stefanprisca.distsystems.app4.ejb.models.Publisher;
 
 @ManagedBean(name = "bookManager", eager = true)
 @SessionScoped
-public class BookManagerBean {
+public class BookManagerBean implements Serializable {
+	private static final long serialVersionUID = -5192688042447978994L;
+
+	private static ShoppingCartBean shoppingCart;
+
+	public static void cleanCart() {
+		shoppingCart = null;
+	}
+
+	private final BookProviderRemote bkProvider;
 
 	private List<Book> books;
 	private Book book;
-	private final BookProviderRemote bkProvider;
 
 	public BookManagerBean() {
 		bkProvider = ClientUtility.doLookup();
@@ -44,12 +53,51 @@ public class BookManagerBean {
 		return NavigationBean.editB_ToAdminPage();
 	}
 
+	public String takeBook(Book b) {
+		if (shoppingCart == null) {
+			shoppingCart = new ShoppingCartBean();
+		}
+
+		// System.out.println("\n\n\n Adding boook in shopping cart "
+		// + b.getName() + " ============================= \n\n");
+
+		shoppingCart.addBook(b);
+
+		// for (Book b2 : shoppingCart.getBooks()) {
+		// System.out.println("User page Book from shopping cart: "
+		// + b2.getName());
+		// }
+		return "";
+	}
+
+	public String toShoppingCart() {
+
+		if (shoppingCart == null) {
+			shoppingCart = new ShoppingCartBean();
+		}
+
+		// System.out
+		// .println("\n\n\n going to shop cart \n ============================= \n\n");
+		// for (Book b : shoppingCart.getBooks()) {
+		// System.out.println("User page Book from shopping cart: "
+		// + b.getName());
+		// }
+		return NavigationBean.user_ToShoppingCart();
+	}
+
+	// getters and setters ------------------------
+
 	public List<Book> getBooks() {
 		return books;
 	}
 
 	public void setBooks(List<Book> books) {
-		this.books = books;
+
+		for (Book b : books) {
+			bkProvider.updateBook(b);
+		}
+
+		this.books = bkProvider.getBooks();
 	}
 
 	public Book getBook() {
@@ -58,6 +106,14 @@ public class BookManagerBean {
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	public ShoppingCartBean getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(ShoppingCartBean shoppingCart) {
+		this.shoppingCart = shoppingCart;
 	}
 
 }

@@ -12,9 +12,7 @@
 	<h:form>
 
 		<h:outputStylesheet library="css" name="style.css" />
-		<h:outputText id="errorMessage"
-			value="#{validationBean.errorMessage}!!!"></h:outputText>
-		<h:dataTable value="#{bookManager.books}" var="book"
+		<h:dataTable value="#{bookManager.shoppingCart.books}" var="book"
 			styleClass="table" headerClass="tableHeader"
 			rowClasses="tableOddRow,tableEvenRow">
 			<h:column>
@@ -36,20 +34,21 @@
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Take book!</f:facet>
-				<h:commandButton value="Take"
-					action="#{validationBean.wrapTakeBook(book.id)}">
+				<f:facet name="header">Remove book</f:facet>
+				<h:commandButton value="Remove"
+					action="#{bookManager.shoppingCart.removeBook(book.id)}">
 				</h:commandButton>
 			</h:column>
 
 		</h:dataTable>
 
-		<br></br>
-		<h:commandButton  value = "See Shopping Cart"
-			id="toShoppingCartButton" action="#{bookManager.toShoppingCart}"/>
-		<br></br>
-		<h:commandButton id="button" value="LogOut"
-			action="#{userManager.doLogout}" />
+		<br />
+		<br />
+		<h:commandButton value="Confirm Checkout" id="confirmButton"
+			action="#{validationBean.wrapConfirmCheckout(bookManager.shoppingCart.books)}" />
+		<br />
+		<h:commandButton value="Back" id="backButton"
+			action="#{bookManager.shoppingCart.back}" />
 		<br />
 	</h:form>
 

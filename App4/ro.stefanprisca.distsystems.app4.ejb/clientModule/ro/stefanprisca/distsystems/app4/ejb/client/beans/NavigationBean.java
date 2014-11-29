@@ -29,4 +29,12 @@ public class NavigationBean {
 		return "admin.xhtml?faces-redirect=true";
 	}
 
+	public static String user_ToShoppingCart() {
+		return "shoppingCart.xhtml?faces-redirect=true";
+	}
+
+	public static String shoppingCart_ToUserPage() {
+		return "user.xhtml?faces-redirect=true";
+	}
+
 }

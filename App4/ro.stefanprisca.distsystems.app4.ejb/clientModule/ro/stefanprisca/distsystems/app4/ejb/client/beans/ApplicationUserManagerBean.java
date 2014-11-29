@@ -71,6 +71,8 @@ public class ApplicationUserManagerBean {
 
 		}
 
+		BookManagerBean.cleanCart();
+
 		this.user = null;
 
 		return NavigationBean.logout_ToLogInPage();

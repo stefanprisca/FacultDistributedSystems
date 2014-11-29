@@ -75,4 +75,10 @@ public class Book implements Serializable {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		return this.id.equals(((Book) obj).getId());
+	}
 }
