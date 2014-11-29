@@ -56,6 +56,7 @@ public class DBConnectionTest {
 			Book b = new Book();
 			b.setName("Stefan's ds assignment");
 			b.setAuthor("Stefan");
+			b.setQuantity(100);
 			b.setPub((Publisher) q1.getResultList().get(0));
 
 			em.persist(b);

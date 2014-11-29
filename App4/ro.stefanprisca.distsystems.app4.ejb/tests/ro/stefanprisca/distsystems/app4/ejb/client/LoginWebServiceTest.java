@@ -14,27 +14,24 @@ import ro.stefanprisca.distsystems.utils.login.models.ApplicationUser;
 @RunWith(JUnit4.class)
 public class LoginWebServiceTest {
 	private ApplicationUserManagerBean usermanager;
-	private NavigationBean navbean;
 
 	@Before
 	public void setup() {
 		usermanager = new ApplicationUserManagerBean();
-		navbean = new NavigationBean();
-		usermanager.setNavigationBean(navbean);
 	}
 
 	@Test
 	public void testLogIn() {
 		usermanager.setLoginReqID("thisisnotauser");
 		usermanager.setLoginReqPW("nouserpw");
-		assertTrue(usermanager.doLogin().equals(navbean.toLogIn()));
+		assertTrue(usermanager.doLogin().equals(NavigationBean.logout_ToLogInPage()));
 	}
 
 	@Test
 	public void testValidLogIn() {
 		usermanager.setLoginReqID("user");
 		usermanager.setLoginReqPW("user");
-		assertTrue(usermanager.doLogin().equals(navbean.toRegularPage()));
+		assertTrue(usermanager.doLogin().equals(NavigationBean.login_ToRegularPage()));
 	}
 
 	@Test
@@ -43,14 +40,14 @@ public class LoginWebServiceTest {
 		u.setLoginID("NewTestUserAdmin");
 		u.setLoginPW("NewTestUserAdmin");
 		usermanager.setNewAdmin(true);
-		assertTrue(usermanager.addUser().equals(navbean.toAdminPage()));
+		assertTrue(usermanager.addUser().equals(NavigationBean.login_ToAdminPage()));
 	}
 
 	// @Test
 	public void testValidAdminLogIn() {
 		usermanager.setLoginReqID("admin");
 		usermanager.setLoginReqPW("admin");
-		assertTrue(usermanager.doLogin().equals(navbean.toAdminPage()));
+		assertTrue(usermanager.doLogin().equals(NavigationBean.login_ToAdminPage()));
 	}
 
 	// @Test
@@ -59,6 +56,6 @@ public class LoginWebServiceTest {
 		usermanager.setLoginReqPW("admin");
 		usermanager.doLogin();
 		String response = usermanager.doLogout();
-		assertTrue(response.equals(navbean.toLogIn()));
+		assertTrue(response.equals(NavigationBean.logout_ToLogInPage()));
 	}
 }

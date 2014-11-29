@@ -12,5 +12,8 @@ public interface BookProviderRemote {
 
 	public List<Book> getBooks();
 
-	public void saveBooks(List<Book> newBooks);
+	public void updateBook(Book newBook);
+
+	public Book getBook(Long id);
+
 }

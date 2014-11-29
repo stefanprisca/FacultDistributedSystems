@@ -24,6 +24,7 @@ public class Book implements Serializable {
 	private Publisher pub;
 	private String name;
 	private String author;
+	private int quantity;
 
 	public Long getId() {
 		return id;
@@ -65,5 +66,13 @@ public class Book implements Serializable {
 
 	public void setPub(Publisher pub) {
 		this.pub = pub;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 }

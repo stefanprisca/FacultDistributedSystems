@@ -31,9 +31,26 @@ public class BookProviderBean implements BookProviderRemote {
 	}
 
 	@Override
-	public void saveBooks(List<Book> newBooks) {
-		// TODO Auto-generated method stub
+	public void updateBook(Book newBook) {
+		Book oldBook = dbBookProvider.getBook(newBook.getId());
+		dbBookProvider.beginTransaction();
+		newBook.setPub(dbBookProvider.getPublisher(newBook.getPub().getName()));
+		if (oldBook == null) {
+			dbBookProvider.addBook(newBook);
+		} else {
+			oldBook.setAuthor(newBook.getAuthor());
+			oldBook.setName(newBook.getName());
+			oldBook.setQuantity(newBook.getQuantity());
+			oldBook.setPrice(newBook.getPrice());
+			oldBook.setPub(newBook.getPub());
+		}
+		dbBookProvider.endTransaction();
 
+	}
+
+	@Override
+	public Book getBook(Long id) {
+		return dbBookProvider.getBook(id);
 	}
 
 }

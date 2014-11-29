@@ -1,7 +1,6 @@
 package ro.stefanprisca.distsystems.app4.ejb.client.beans;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -19,9 +18,6 @@ public class ApplicationUserManagerBean {
 
 	private String loginReqID;
 	private String loginReqPW;
-
-	@ManagedProperty(value = "#{navigationBean}")
-	private NavigationBean navigationBean;
 
 	protected final ILoginUtils loginUtils;
 
@@ -54,13 +50,13 @@ public class ApplicationUserManagerBean {
 		String response = loginUtils.doLogin(loginReqID, loginReqPW);
 		if (response.equals(Constants.LOGIN_ADMINISTRATOR)) {
 			this.user.setType(Constants.ADMINISTRATOR_TYPE);
-			return navigationBean.toAdminPage();
+			return NavigationBean.login_ToAdminPage();
 		} else if (response.equals(Constants.LOGIN_REGULAR_USER)) {
 			this.user.setType(Constants.REGULAR_TYPE);
-			return navigationBean.toRegularPage();
+			return NavigationBean.login_ToRegularPage();
 		}
 		this.user = null;
-		return navigationBean.toLogIn();
+		return NavigationBean.logout_ToLogInPage();
 	}
 
 	public String doLogout() {
@@ -77,7 +73,7 @@ public class ApplicationUserManagerBean {
 
 		this.user = null;
 
-		return navigationBean.toLogIn();
+		return NavigationBean.logout_ToLogInPage();
 	}
 
 	public boolean isAdminLogin() {
@@ -112,10 +108,6 @@ public class ApplicationUserManagerBean {
 
 	public void setLoginReqPW(String loginReqPW) {
 		this.loginReqPW = loginReqPW;
-	}
-
-	public void setNavigationBean(NavigationBean navigationBean) {
-		this.navigationBean = navigationBean;
 	}
 
 	public boolean isNewAdmin() {
