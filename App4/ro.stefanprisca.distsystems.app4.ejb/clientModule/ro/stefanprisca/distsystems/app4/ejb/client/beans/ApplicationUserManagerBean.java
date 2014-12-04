@@ -27,6 +27,10 @@ public class ApplicationUserManagerBean {
 				.provideLoginUtilsServiceAccess(connName);
 	}
 
+	public String toRegPage() {
+		return NavigationBean.login_ToRegisterPage();
+	}
+
 	public String addUser() {
 		if (this.user != null) {
 			if (this.newAdmin) {

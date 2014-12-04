@@ -15,8 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "applicationUser", propOrder = { "id", "name", "homeAddress",
-		"longitude", "latitude", "birthDate", "loginID", "loginPW", "type",
-		"canEdit" })
+		"email", "birthDate", "loginID", "loginPW", "type", "canEdit" })
 public class ApplicationUser {
 
 	@Id
@@ -32,8 +31,7 @@ public class ApplicationUser {
 
 	private String name;
 	private String homeAddress;
-	private String longitude;
-	private String latitude;
+	private String email;
 	private String birthDate;
 
 	private String loginID;
@@ -56,14 +54,6 @@ public class ApplicationUser {
 		this.homeAddress = homeAddress;
 	}
 
-	public String getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
-	}
-
 	public String getBirthDate() {
 		return birthDate;
 	}
@@ -72,19 +62,10 @@ public class ApplicationUser {
 		this.birthDate = birthDate;
 	}
 
-	public String getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
 	@Override
 	public String toString() {
 		return "User (" + getId() + ") " + getName() + " lives at "
-				+ getHomeAddress() + "(" + getLatitude() + ";" + getLongitude()
-				+ "); Born at " + getBirthDate();
+				+ getHomeAddress() + "(" + "); Born at " + getBirthDate();
 	}
 
 	public String getLoginName() {
@@ -137,6 +118,14 @@ public class ApplicationUser {
 
 	public void setLoginPW(String loginPW) {
 		this.loginPW = loginPW;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

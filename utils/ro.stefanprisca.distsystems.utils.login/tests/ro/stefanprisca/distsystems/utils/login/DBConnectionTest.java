@@ -2,9 +2,6 @@ package ro.stefanprisca.distsystems.utils.login;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,11 +24,9 @@ public class DBConnectionTest {
 	@BeforeClass
 	public static void setUpClass() {
 		LoginUtilsServiceFactory.setDbName("ds_assign4");
-		Map<String, String> properties = new HashMap<String, String>();
-		properties.put(Constants.PERSISTT_JDBC_URL_CONNECTION,
-				LoginUtilsServiceFactory.getDbConnectionString());
+
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME,
-				properties);
+				LoginUtilsServiceFactory.provideDefaultConnectionProperties());
 	}
 
 	@Before
@@ -55,8 +50,7 @@ public class DBConnectionTest {
 			user.setBirthDate("12");
 			user.setHomeAddress("asda");
 			user.setName("Stefan");
-			user.setLatitude("0");
-			user.setLongitude("0");
+			user.setEmail("stefan.prisca@gmail.com");
 			user.setType(Constants.REGULAR_TYPE);
 			user.setLoginName("user");
 			user.setPassword("user");

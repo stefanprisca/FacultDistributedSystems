@@ -51,6 +51,19 @@
 
 	<dependencies>
 
+		<!-- JMS Dependency -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.jms</groupId>
+			<artifactId>jboss-jms-api_2.0_spec</artifactId>
+			<version>1.0.0.Alpha1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			</dependency>
+
+
 		<!-- Javax dependencies -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -151,7 +164,7 @@
 			<artifactId>sqljdbc4</artifactId>
 			<version>4.0</version>
 		</dependency>
-		
+
 		<!-- JUnit -->
 
 		<dependency>

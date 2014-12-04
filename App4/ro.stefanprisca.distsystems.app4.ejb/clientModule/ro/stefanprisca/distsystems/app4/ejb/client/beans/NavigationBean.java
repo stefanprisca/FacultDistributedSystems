@@ -14,7 +14,7 @@ public class NavigationBean {
 		return "/home.xhtml?faces-redirect=true";
 	}
 
-	public static String login_ToRegPage() {
+	public static String login_ToRegisterPage() {
 		return "/register.xhtml?faces-redirect=true";
 	}
 

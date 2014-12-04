@@ -71,9 +71,8 @@ public class DefaultLoginUtils implements ILoginUtils {
 				old.setCanEdit(false);
 				old.setName(user.getName());
 				old.setHomeAddress(user.getHomeAddress());
-				old.setLatitude(user.getLatitude());
 				old.setLoginName(user.getLoginName());
-				old.setLongitude(user.getLongitude());
+				old.setEmail(user.getEmail());
 				old.setPassword(user.getPassword());
 			} else {
 				old = user;

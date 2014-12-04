@@ -45,7 +45,6 @@ public class BookProviderBean implements BookProviderRemote {
 			oldBook.setPub(newBook.getPub());
 		}
 		dbBookProvider.endTransaction();
-
 	}
 
 	@Override

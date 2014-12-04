@@ -1,6 +1,9 @@
 package ro.stefanprisca.distsystems.app4.ejb.client.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -29,6 +32,7 @@ public class BookManagerBean implements Serializable {
 
 	public BookManagerBean() {
 		bkProvider = ClientUtility.doLookup();
+
 		books = bkProvider.getBooks();
 		this.book = new Book();
 		this.book.setPub(new Publisher());
@@ -36,6 +40,7 @@ public class BookManagerBean implements Serializable {
 
 	public String editBook(Long bookId) {
 		this.book = bkProvider.getBook(bookId);
+
 		return NavigationBean.admin_ToEditBookPage();
 	}
 
@@ -43,6 +48,10 @@ public class BookManagerBean implements Serializable {
 		this.book = new Book();
 		this.book.setId(-1l);
 		this.book.setPub(new Publisher());
+		try {
+			invokePublisher();
+		} catch (IOException e) {
+		}
 		return NavigationBean.admin_ToEditBookPage();
 	}
 
@@ -83,6 +92,20 @@ public class BookManagerBean implements Serializable {
 		// + b.getName());
 		// }
 		return NavigationBean.user_ToShoppingCart();
+	}
+
+	private void invokePublisher() throws IOException {
+		URLConnection connection = new URL(
+				"http://localhost:8080/OnlineBookShop/JMSService?topic")
+				.openConnection();
+		connection.setRequestProperty("Accept-Charset", "UTF-8");
+		connection.getInputStream();
+
+		System.out
+				.println("---------------------------------\n\n\nOppened servlet connection: "
+						+ connection.getURL()
+						+ "\n\n\n-------------------------");
+
 	}
 
 	// getters and setters ------------------------

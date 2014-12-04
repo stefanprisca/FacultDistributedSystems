@@ -2,7 +2,6 @@ package ro.stefanprisca.distsystems.app4.ejb.client;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
@@ -15,14 +14,14 @@ import ro.stefanprisca.distsystems.utils.login.LoginUtilsServiceFactory;
 @RunWith(JUnit4.class)
 public class ServerConnectionTest {
 
-	@Test
+	// @Test
 	public void testEjbConnection() {
 		BookProviderRemote provider = ClientUtility.doLookup();
 		assertTrue(provider.getServerConfirmation().equals(
 				Messages.EJB_CONNECTION_TEST));
 	}
 
-	@Test
+	// @Test
 	public void testLoginWebServiceConnection() {
 		String conf = LoginUtilsServiceFactory.provideLoginUtilsServiceAccess(
 				Constants.DB_CONNECTION_DBNAME).getConfString();
@@ -30,4 +29,5 @@ public class ServerConnectionTest {
 		assertTrue(conf
 				.equals(ro.stefanprisca.distsystems.utils.login.Constants.CONNECTION_CONF_STRING));
 	}
+
 }
