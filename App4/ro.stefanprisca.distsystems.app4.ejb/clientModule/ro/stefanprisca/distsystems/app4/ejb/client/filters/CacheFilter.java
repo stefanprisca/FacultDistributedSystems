@@ -1,4 +1,4 @@
-package ro.stefanprisca.distsystems.app4.ejb.filters;
+package ro.stefanprisca.distsystems.app4.ejb.client.filters;
 
 import java.io.IOException;
 

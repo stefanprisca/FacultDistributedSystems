@@ -24,7 +24,7 @@
    <!-- cache filter -->
    <filter>
         <filter-name>cacheFilter</filter-name>
-        <filter-class>ro.stefanprisca.distsystems.app4.ejb.filters.CacheFilter</filter-class>
+        <filter-class>ro.stefanprisca.distsystems.app4.ejb.client.filters.CacheFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>cacheFilter</filter-name>
