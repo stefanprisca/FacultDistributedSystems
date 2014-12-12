@@ -20,7 +20,7 @@ public class ServiceTest {
 	@Before
 	public void setUp() {
 		client = LoginUtilsServiceFactory
-				.provideLoginUtilsServiceAccess("ds_assign4");
+				.provideLoginUtilsServiceAccess();
 	}
 
 	@Test

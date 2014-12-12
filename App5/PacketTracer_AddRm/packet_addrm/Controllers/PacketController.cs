@@ -12,21 +12,23 @@ namespace packet_addrm.Controllers
     {
         public IEnumerable<Packet> GetPackets()
         {
-            var db = new ds_assign5Entities();
+            var db = new Ds_assign5Entities();
             IQueryable<Packet> query = db.Packets;
             IEnumerable<Packet> pcks = query.AsEnumerable();
-            if (! pcks.Any())
-            {
-                PutPacket("New Pck", "None");
+            if (!pcks.Any()) { 
+                PutPacket("New Pck");
+                PutPacket("New Pck2");
+                PutPacket("New Pck3");
+                PutPacket("New Pck4");
             }
             return pcks;
         }
 
 
-        public string PutPacket(String Name, String Location)
+        public string PutPacket(String Name)
         {
-            var db = new ds_assign5Entities();
-            Packet p = new Packet() { Name = Name, Location = Location, EnableTracking = true };
+            var db = new Ds_assign5Entities();
+            Packet p = new Packet() { Name = Name, Location = "", EnableTracking = false };
             db.Packets.Add(p);
             db.SaveChanges();
 
@@ -35,7 +37,7 @@ namespace packet_addrm.Controllers
 
         public void DeletePacket(int packetId)
         {
-            using (ds_assign5Entities db = new ds_assign5Entities())
+            using (Ds_assign5Entities db = new Ds_assign5Entities())
             {
                 Packet p = db.Packets.Find(packetId);
                 db.Packets.Remove(p);

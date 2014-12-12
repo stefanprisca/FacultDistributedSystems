@@ -9,18 +9,9 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 
 public class LoginUtilsServiceFactory {
 
-	private static String dbName = "ds_assign4";
-
-	public static void setDbName(String dbName) {
-		LoginUtilsServiceFactory.dbName = dbName;
-	}
+	private static String dbName = "ds_assign5";
 
 	private static String dbConnectionString = "jdbc:sqlserver://localhost:9895;databaseName=";
-
-	public static ILoginUtils provideLoginUtilsServiceAccess(String dbNameIn) {
-		dbName = dbNameIn;
-		return provideLoginUtilsServiceAccess();
-	}
 
 	public static ILoginUtils provideLoginUtilsServiceAccess() {
 		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
@@ -53,9 +44,8 @@ public class LoginUtilsServiceFactory {
 		properties.put(Constants.PERSISTT_JDBC_URL_CONNECTION,
 				LoginUtilsServiceFactory.getDbConnectionString());
 
-		// properties.put("eclipselink.ddl-generation",
-		// "drop-and-create-tables");
-		// properties.put("eclipselink.ddl-generation.output-mode", "database");
+		properties.put("eclipselink.ddl-generation", "drop-and-create-tables");
+		properties.put("eclipselink.ddl-generation.output-mode", "database");
 		return properties;
 	}
 }

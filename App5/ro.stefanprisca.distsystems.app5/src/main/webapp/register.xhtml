@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>App 5</title>
+	<h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+	<h1>Hello!</h1>
+
+	<h:form>
+		<br />
+		<h3>Register here</h3>
+		<hr />
+		<table>
+			<tr>
+				<td>Name :</td>
+				<td><h:inputText size="10" value="#{userManager.user.name}" /></td>
+			</tr>
+			<tr>
+				<td>Birthday :</td>
+				<td><h:inputText size="20"
+						value="#{userManager.user.birthDate}" /></td>
+			</tr>
+			<tr>
+				<td>Home Address :</td>
+				<td><h:inputText size="20"
+						value="#{userManager.user.homeAddress}" /></td>
+			</tr>
+			<tr>
+				<td>Login ID :</td>
+				<td><h:inputText size="10"
+						value="#{userManager.user.loginID}" /></td>
+			</tr>
+			<tr>
+				<td>Login PW :</td>
+				<td><h:inputText size="10"
+						value="#{userManager.user.loginPW}" /></td>
+			</tr>
+			<tr>
+				<td>Email :</td>
+				<td><h:inputText size="10"
+						value="#{userManager.user.email}" /></td>
+			</tr>
+			<tr>
+				<td>Add Administrator</td>
+				<td><h:selectBooleanCheckbox value="#{userManager.newAdmin}" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><h:commandButton value="Add User"
+						action="#{userManager.addUser}" /></td>
+			</tr>
+		</table>
+	</h:form>
+
+</h:body>
+</html>

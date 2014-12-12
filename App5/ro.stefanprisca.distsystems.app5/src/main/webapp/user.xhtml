@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"htth://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Packet search</title>
+</h:head>
+<h:body>
+	<h:form>
+
+		<h:outputStylesheet library="css" name="style.css" />
+		<h:dataTable value="#{pckTracking.packets}" var="packet"
+			styleClass="table" headerClass="tableHeader"
+			rowClasses="tableOddRow,tableEvenRow">
+			<h:column>
+				<f:facet name="header">Packet Name</f:facet>
+
+				<h:outputText styleClass="tableContent" value="#{packet.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Packet Location</f:facet>
+				<h:outputText styleClass="tableContent" value="#{packet.location}" />
+			</h:column>
+			
+
+
+		</h:dataTable>
+		<h:commandButton id="button" value="LogOut"
+			action="#{userManager.doLogout}" />
+		<br />
+	</h:form>
+
+</h:body>
+</html>

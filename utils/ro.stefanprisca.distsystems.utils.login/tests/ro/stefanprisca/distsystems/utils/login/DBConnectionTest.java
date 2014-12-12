@@ -23,7 +23,6 @@ public class DBConnectionTest {
 
 	@BeforeClass
 	public static void setUpClass() {
-		LoginUtilsServiceFactory.setDbName("ds_assign4");
 
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME,
 				LoginUtilsServiceFactory.provideDefaultConnectionProperties());
