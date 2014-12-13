@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"htth://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Add New Packet</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p>
+			Note that by adding a location the packet will be registered for tracking automatically.
+		</p>
+		<table>
+			<tr>
+				<td>Packet Name :</td>
+				<td><h:inputText size="10" value="#{pckTracking.managedPacket.name}" /></td>
+			</tr>
+			<tr>
+				<td>Packet Location :</td>
+				<td><h:inputText size="20"
+						value="#{pckTracking.managedPacket.location}" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><h:commandButton value="Add Packet"
+						action="#{pckTracking.confirmAddPacket}" /></td>
+			</tr>
+		</table>
+	</h:form>
+
+</h:body>
+</html>

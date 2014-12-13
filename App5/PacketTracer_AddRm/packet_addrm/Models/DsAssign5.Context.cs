@@ -13,10 +13,10 @@ namespace packet_addrm.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Ds_assign5Entities : DbContext
+    public partial class ds_assign5Entities : DbContext
     {
-        public Ds_assign5Entities()
-            : base("name=Ds_assign5Entities")
+        public ds_assign5Entities()
+            : base("name=ds_assign5Entities")
         {
         }
     

@@ -44,8 +44,8 @@ public class LoginUtilsServiceFactory {
 		properties.put(Constants.PERSISTT_JDBC_URL_CONNECTION,
 				LoginUtilsServiceFactory.getDbConnectionString());
 
-		properties.put("eclipselink.ddl-generation", "drop-and-create-tables");
-		properties.put("eclipselink.ddl-generation.output-mode", "database");
+//		properties.put("eclipselink.ddl-generation", "drop-and-create-tables");
+//		properties.put("eclipselink.ddl-generation.output-mode", "database");
 		return properties;
 	}
 }

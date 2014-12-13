@@ -2,10 +2,6 @@ package ro.stefanprisca.distsystems.app5.beans;
 
 public class NavigationBean {
 
-	public static String login_ToAdminPage() {
-		return "secured/admin.xhtml?faces-redirect=true";
-	}
-
 	public static String login_ToRegularPage() {
 		return "/user.xhtml?faces-redirect=true";
 	}
@@ -18,22 +14,19 @@ public class NavigationBean {
 		return "/register.xhtml?faces-redirect=true";
 	}
 
-	public static String admin_ToEditBookPage() {
-		// this page is reached from the administrator page, so no need to put
-		// < secured/ > in front of it, as the pages are
-		// in the same folder
-		return "editBook.xhtml?faces-redirect=true";
+	public static String user_ToAddPacket() {
+		return "addPacket.xhtml?faces-redirect=true";
 	}
 
-	public static String editB_ToAdminPage() {
-		return "admin.xhtml?faces-redirect=true";
+	public static String addPacket_ToUserPage() {
+		return "user.xhtml?faces-redirect=true";
 	}
 
-	public static String user_ToShoppingCart() {
-		return "shoppingCart.xhtml?faces-redirect=true";
+	public static String user_ToUpdateLoc() {
+		return "updateLocation.xhtml?faces-redirect=true";
 	}
-
-	public static String shoppingCart_ToUserPage() {
+	
+	public static String updateLoc_ToUserPage() {
 		return "user.xhtml?faces-redirect=true";
 	}
 

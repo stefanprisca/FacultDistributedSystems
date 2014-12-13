@@ -56,7 +56,7 @@ public class ApplicationUserManagerBean {
 		String response = loginUtils.doLogin(loginReqID, loginReqPW);
 		if (response.equals(Constants.LOGIN_ADMINISTRATOR)) {
 			this.user.setType(Constants.ADMINISTRATOR_TYPE);
-			return NavigationBean.login_ToAdminPage();
+			return NavigationBean.login_ToRegularPage();
 		} else if (response.equals(Constants.LOGIN_REGULAR_USER)) {
 			this.user.setType(Constants.REGULAR_TYPE);
 			return NavigationBean.login_ToRegularPage();

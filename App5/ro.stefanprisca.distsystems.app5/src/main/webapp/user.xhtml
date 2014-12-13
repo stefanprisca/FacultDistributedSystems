@@ -10,7 +10,6 @@
 </h:head>
 <h:body>
 	<h:form>
-
 		<h:outputStylesheet library="css" name="style.css" />
 		<h:dataTable value="#{pckTracking.packets}" var="packet"
 			styleClass="table" headerClass="tableHeader"
@@ -21,13 +20,26 @@
 				<h:outputText styleClass="tableContent" value="#{packet.name}" />
 			</h:column>
 			<h:column>
-				<f:facet name="header">Packet Location</f:facet>
-				<h:outputText styleClass="tableContent" value="#{packet.location}" />
+				<f:facet name="header">Tracking</f:facet>
+				<h:outputText styleClass="tableContent" value="#{packet.trackingEnabled}" />
 			</h:column>
-			
+			<h:column>
+				<f:facet name="header">Tracking Actions</f:facet>
+				<h:commandButton value="Enable Tracking" rendered="#{not packet.trackingEnabled}" action="#{pckTracking.enableTracking(packet.id)}"></h:commandButton>
+				<h:commandButton value="Update" rendered="#{packet.trackingEnabled}" action="#{pckTracking.toUpdateLocation(packet.id)}"></h:commandButton>
+				<h:commandButton value="Check" rendered="#{packet.trackingEnabled}" action="#{pckTracking.getPacketLocation(packet.id)}"></h:commandButton>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+				<h:commandButton value="Delete" action="#{pckTracking.deletePacket(packet.id)}"></h:commandButton>
+			</h:column>
 
 
 		</h:dataTable>
+		<h:messages showDetail="true" showSummary="true" autoUpdate="true"/>
+		<h:commandButton id="addNew" value="Add New Packet"
+			action="#{pckTracking.addPacket}" />
+		<br />
 		<h:commandButton id="button" value="LogOut"
 			action="#{userManager.doLogout}" />
 		<br />

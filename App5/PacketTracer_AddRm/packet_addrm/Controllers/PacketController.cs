@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace packet_addrm.Controllers
@@ -12,37 +13,50 @@ namespace packet_addrm.Controllers
     {
         public IEnumerable<Packet> GetPackets()
         {
-            var db = new Ds_assign5Entities();
+            var db = new ds_assign5Entities();
             IQueryable<Packet> query = db.Packets;
             IEnumerable<Packet> pcks = query.AsEnumerable();
-            if (!pcks.Any()) { 
-                PutPacket("New Pck");
-                PutPacket("New Pck2");
-                PutPacket("New Pck3");
-                PutPacket("New Pck4");
+            if (!pcks.Any())
+            {
+                //PutPacket("New Pck");
+                //PutPacket("New Pck2");
+                //PutPacket("New Pck3");
+                //PutPacket("New Pck4");
             }
             return pcks;
         }
 
 
-        public string PutPacket(String Name)
+        public HttpResponseMessage Get_AddPacket([FromUri] String Name, [FromUri] String Location)
         {
-            var db = new Ds_assign5Entities();
-            Packet p = new Packet() { Name = Name, Location = "", EnableTracking = false };
+            var db = new ds_assign5Entities();
+            Packet p = new Packet() { Name = Name.Trim(), Location = Location.Trim(), EnableTracking = !String.IsNullOrEmpty(Location.Trim()) };
             db.Packets.Add(p);
             db.SaveChanges();
 
-            return "Added succesfully";
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        public void DeletePacket(int packetId)
+        public void Delete_Packet([FromUri] int Id)
         {
-            using (Ds_assign5Entities db = new Ds_assign5Entities())
+            ds_assign5Entities db = new ds_assign5Entities();
+            Packet p = db.Packets.Find(Id);
+            if (p != null)
             {
-                Packet p = db.Packets.Find(packetId);
                 db.Packets.Remove(p);
                 db.SaveChanges();
-            };
+            }
+
+        }
+
+        // PUT api/<controller>/5
+        public void Put_EnablePacket(int id)
+        {
+            ds_assign5Entities db = new ds_assign5Entities();
+            Packet p = db.Packets.Find(id);
+            p.EnableTracking = true;
+            db.SaveChanges();
+
         }
     }
 }
