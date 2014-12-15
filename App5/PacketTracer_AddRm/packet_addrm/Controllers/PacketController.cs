@@ -30,7 +30,7 @@ namespace packet_addrm.Controllers
         public HttpResponseMessage Get_AddPacket([FromUri] String Name, [FromUri] String Location)
         {
             var db = new ds_assign5Entities();
-            Packet p = new Packet() { Name = Name.Trim(), Location = Location.Trim(), EnableTracking = !String.IsNullOrEmpty(Location.Trim()) };
+            Packet p = new Packet() { Name = Name.Trim(), Location = Location, EnableTracking = !String.IsNullOrEmpty(Location) };
             db.Packets.Add(p);
             db.SaveChanges();
 
