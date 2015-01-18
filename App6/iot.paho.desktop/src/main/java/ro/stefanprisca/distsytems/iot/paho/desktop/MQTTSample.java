@@ -13,11 +13,19 @@ import ro.stefanprisca.distsystems.iot.paho.constants.Constants;
  * Hello world!
  *
  */
-public class App {
+public class MQTTSample {
 
-	private static MqttClient sampleClient;
+	private  MqttClient sampleClient;
 
-	public static void subscribe(String... topic) {
+	public MQTTSample(){
+		try {
+			sampleClient = new MqttClient(Constants.BROKER, Constants.CLIENTID);
+		} catch (MqttException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public  void subscribe(String... topic) {
 
 		try {
 
@@ -29,12 +37,8 @@ public class App {
 		}
 	}
 
-	public static void fastPublish() {
-		publish(Constants.TOPIC, Constants.CONTENT);
-
-	}
-
-	public static void publish(String topic, String contents) {
+	
+	public  void publish(String topic, String contents) {
 		try {
 
 			System.out.println("Publishing message: " + Constants.CONTENT);
@@ -53,7 +57,7 @@ public class App {
 		}
 	}
 
-	public static void initConnection() {
+	public  void initConnection() {
 		MemoryPersistence persistence = new MemoryPersistence();
 		try {
 			sampleClient = new MqttClient(Constants.BROKER, Constants.CLIENTID,
@@ -74,7 +78,7 @@ public class App {
 		System.out.println("Connected");
 	}
 
-	public static void disconect(){
+	public  void disconect(){
 		try {
 			sampleClient.disconnect();
 		} catch (MqttException e) {

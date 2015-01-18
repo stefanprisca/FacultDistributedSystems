@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import ro.stefanprisca.distsystems.iot.paho.constants.Constants;
-import ro.stefanprisca.distsytems.iot.paho.desktop.App;
+import ro.stefanprisca.distsytems.iot.paho.desktop.MQTTSample;
 import ro.stefanprisca.distsytems.iot.paho.desktop.MyMqttCallback;
 
 
@@ -21,6 +21,7 @@ import ro.stefanprisca.distsytems.iot.paho.desktop.MyMqttCallback;
 
 public class UIWindow {
 
+	private MQTTSample mqtt;
 	
 	private void createContents(Shell sh){
 		Composite contents = new Composite(sh, SWT.DEFAULT);
@@ -30,7 +31,7 @@ public class UIWindow {
 		connect.setText("Connect");
 		connect.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
-				App.initConnection();
+				mqtt.initConnection();
 			}
 			});
 		Button disconnect = new Button(contents, SWT.PUSH);
@@ -38,7 +39,7 @@ public class UIWindow {
 		disconnect.addSelectionListener(new SelectionAdapter() {
 			
 			public void widgetSelected(SelectionEvent arg0) {
-				App.disconect();
+				mqtt.disconect();
 			}
 		});
 		Button publish = new Button(contents, SWT.PUSH);
@@ -46,7 +47,7 @@ public class UIWindow {
 		publish.addSelectionListener(new SelectionAdapter() {
 			
 			public void widgetSelected(SelectionEvent arg0) {
-				App.fastPublish();
+				mqtt.publish(Constants.TOPIC, Constants.CONTENT);
 			}
 			
 		});
@@ -56,7 +57,7 @@ public class UIWindow {
 		subscribe.addSelectionListener(new SelectionAdapter() {
 			
 			public void widgetSelected(SelectionEvent arg0) {
-				App.subscribe(Constants.TOPIC);
+				mqtt.subscribe(Constants.TOPIC);
 			}
 			
 		});
@@ -65,6 +66,7 @@ public class UIWindow {
 	}
 	
 	private void init(){
+		this.mqtt = new MQTTSample();
 		Display display = new Display();
 		Shell shell = new Shell(display);
 		this.createContents(shell);
