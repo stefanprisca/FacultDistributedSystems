@@ -8,5 +8,6 @@
 	<modules>
 		<module>App5</module>
 		<module>utils</module>
+    <module>iot</module>
   </modules>
 </project>
